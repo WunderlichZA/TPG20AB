@@ -63,3 +63,16 @@ fastlane/Preview.html
 fastlane/screenshots
 fastlane/test_output
 fastlane/readme.md
+.idea/.name
+*.java
+.idea/.name
+*.xml
+*.xml
+*.xml
+*.xml
+app/src/main/res/drawable-v24/ic_launcher_foreground.xml
+*.xml
+*.gradle
+*.xml
+*.xml
+*.xml

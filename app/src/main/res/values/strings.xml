@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">HockeyApplication</string>
+    <string name="hockey_hint_username">Username</string>
+    <string name="hockey_hint_password">Password</string>
+    <string name="hockey_button_login">Login</string>
+    <string name="hockey_button_register">Register</string>
+    <string name="hockey_button_reset_password">Reset Password</string>
 </resources>
