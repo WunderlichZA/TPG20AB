@@ -8,6 +8,8 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
-    <style name="Theme" parent="Theme.AppCompat"></style>
+    <style name="ToolbarTextColor" parent="HockeyAppTheme">
+        <item name="android:textColorPrimary">@color/white</item>
+    </style>
 
 </resources>
