@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">HockeyApplication</string>
+    <string name="user_menu_header">Admin Menu</string>
 </resources>
