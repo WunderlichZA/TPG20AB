@@ -2,12 +2,9 @@ package businesslayer.model;
 
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
+import util.Role;
 
 public class User extends RealmObject {
-
-    enum Role{
-        ADMIN, COACH, NONE;
-    }
 
     @PrimaryKey
     private int userId = 0;
@@ -15,10 +12,9 @@ public class User extends RealmObject {
     private String name;
     private String email;
     private String password;
-    private Role role;
+    private String role;
 
     public User() {
-        role = Role.NONE;
         userId ++;
     }
 
@@ -62,11 +58,11 @@ public class User extends RealmObject {
         this.password = password;
     }
 
-    public Role getRole() {
+    public String getRole() {
         return role;
     }
 
-    public void setRole(Role role) {
+    public void setRole(String role) {
         this.role = role;
     }
 }
