@@ -39,6 +39,3 @@ build/
 # Eclipse project files
 .classpath
 .project
-
-# Proguard folder
-proguard/

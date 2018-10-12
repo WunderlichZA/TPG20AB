@@ -2,7 +2,6 @@ package businesslayer.model;
 
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
-import util.Role;
 
 public class User extends RealmObject {
 
