@@ -1,4 +1,8 @@
 <resources>
     <string name="app_name">HockeyApplication</string>
-    <string name="user_menu_header">Admin Menu</string>
+    <string name="activity_main_title">Admin Menu</string>
+    <string name="activity_roles_title">Set Roles</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
