@@ -7,13 +7,15 @@ public class MatchStats extends RealmObject {
 
     @PrimaryKey
     private int matchStatsId;
-    private String TurnOvers;
-    private String Goals;
+    private String firstHalfTurnOvers;
+    private String secondHalfTurnOvers;
+    private String firstHalfGoals;
+    private String secondHalfGoals;
     private String score;
-    private String circlePenetrations;
+    private String circlePenetration;
     private String penaltyCorners;
-    private String shotsAtGoal;
-    private Team team;
+    private String shortsAtGoal;
+    private Opponent opponent;
 
     public int getMatchStatsId() {
         return matchStatsId;
@@ -23,20 +25,36 @@ public class MatchStats extends RealmObject {
         this.matchStatsId = matchStatsId;
     }
 
-    public String getTurnOvers() {
-        return TurnOvers;
+    public String getFirstHalfTurnOvers() {
+        return firstHalfTurnOvers;
     }
 
-    public void setTurnOvers(String turnOvers) {
-        TurnOvers = turnOvers;
+    public void setFirstHalfTurnOvers(String firstHalfTurnOvers) {
+        this.firstHalfTurnOvers = firstHalfTurnOvers;
     }
 
-    public String getGoals() {
-        return Goals;
+    public String getSecondHalfTurnOvers() {
+        return secondHalfTurnOvers;
     }
 
-    public void setGoals(String goals) {
-        Goals = goals;
+    public void setSecondHalfTurnOvers(String secondHalfTurnOvers) {
+        this.secondHalfTurnOvers = secondHalfTurnOvers;
+    }
+
+    public String getFirstHalfGoals() {
+        return firstHalfGoals;
+    }
+
+    public void setFirstHalfGoals(String firstHalfGoals) {
+        this.firstHalfGoals = firstHalfGoals;
+    }
+
+    public String getSecondHalfGoals() {
+        return secondHalfGoals;
+    }
+
+    public void setSecondHalfGoals(String secondHalfGoals) {
+        this.secondHalfGoals = secondHalfGoals;
     }
 
     public String getScore() {
@@ -47,12 +65,12 @@ public class MatchStats extends RealmObject {
         this.score = score;
     }
 
-    public String getCirclePenetrations() {
-        return circlePenetrations;
+    public String getCirclePenetration() {
+        return circlePenetration;
     }
 
-    public void setCirclePenetrations(String circlePenetrations) {
-        this.circlePenetrations = circlePenetrations;
+    public void setCirclePenetration(String circlePenetration) {
+        this.circlePenetration = circlePenetration;
     }
 
     public String getPenaltyCorners() {
@@ -63,19 +81,19 @@ public class MatchStats extends RealmObject {
         this.penaltyCorners = penaltyCorners;
     }
 
-    public String getShotsAtGoal() {
-        return shotsAtGoal;
+    public String getShortsAtGoal() {
+        return shortsAtGoal;
     }
 
-    public void setShotsAtGoal(String shotsAtGoal) {
-        this.shotsAtGoal = shotsAtGoal;
+    public void setShortsAtGoal(String shortsAtGoal) {
+        this.shortsAtGoal = shortsAtGoal;
     }
 
-    public Team getTeam() {
-        return team;
+    public Opponent getOpponent() {
+        return opponent;
     }
 
-    public void setTeam(Team team) {
-        this.team = team;
+    public void setOpponent(Opponent opponent) {
+        this.opponent = opponent;
     }
 }

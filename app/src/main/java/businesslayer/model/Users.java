@@ -3,26 +3,16 @@ package businesslayer.model;
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
 
-public class User extends RealmObject {
+public class Users extends RealmObject{
 
     @PrimaryKey
-    private int userId = 0;
+    private String email;
     private String surname;
     private String name;
-    private String email;
     private String password;
     private String role;
 
-    public User() {
-        userId ++;
-    }
-
-    public int getUserId() {
-        return userId;
-    }
-
-    public void setUserId(int userId) {
-        this.userId = userId;
+    public Users() {
     }
 
     public String getSurname() {
@@ -63,5 +53,10 @@ public class User extends RealmObject {
 
     public void setRole(String role) {
         this.role = role;
+    }
+
+    @Override
+    public String toString() {
+        return  name + " " + surname;
     }
 }

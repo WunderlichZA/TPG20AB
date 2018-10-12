@@ -8,7 +8,7 @@ public class Team extends RealmObject {
     @PrimaryKey
     private int teamId;
     private String teamName;
-    private User coach;
+    private Users coach;
     private String ageGroup;
 
     public int getTeamId() {
@@ -27,11 +27,11 @@ public class Team extends RealmObject {
         this.teamName = teamName;
     }
 
-    public User getCoach() {
+    public Users getCoach() {
         return coach;
     }
 
-    public void setCoach(User coach) {
+    public void setCoach(Users coach) {
         this.coach = coach;
     }
 
