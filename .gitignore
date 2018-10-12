@@ -42,3 +42,4 @@ build/
 
 # Proguard folder
 proguard/
+app/src/main/java/util/Role.java
