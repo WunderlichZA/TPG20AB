@@ -1,5 +1,6 @@
 package za.ac.cut.hockeyapplication;
 
+import android.content.Intent;
 import android.support.design.button.MaterialButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -22,7 +23,7 @@ public class  MainActivity extends AppCompatActivity {
     private TextView loggedUser, userRole;
     private LinearLayout adminMenu, coachMenu;
 
-    private MaterialButton buttonLogout;
+    private MaterialButton buttonLogout, buttonSetRoles;
 
     Toolbar toolbar;
 
@@ -31,6 +32,7 @@ public class  MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         coachMenu = findViewById(R.id.coach_menu);
@@ -38,6 +40,7 @@ public class  MainActivity extends AppCompatActivity {
         userRole = findViewById(R.id.role);
 
         buttonLogout = findViewById(R.id.logout_button);
+        buttonSetRoles = findViewById(R.id.set_roles_button);
 
         String userId = UserIdStorageFactory.instance().getStorage().get();
         Backendless.Data.of(BackendlessUser.class).findById(userId, new AsyncCallback<BackendlessUser>() {
@@ -76,6 +79,13 @@ public class  MainActivity extends AppCompatActivity {
                         Toast.makeText(MainActivity.this, fault.getMessage(), Toast.LENGTH_LONG).show();
                     }
                 });
+            }
+        });
+
+        buttonSetRoles.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(MainActivity.this, SetRolesActivity.class));
             }
         });
     }
