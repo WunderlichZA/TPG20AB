@@ -43,13 +43,13 @@ public class UserActivity extends AppCompatActivity {
         getSupportActionBar();
 
 
-        listView = findViewById(R.id.list_view);
+        listView = findViewById(R.id.listView);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 user = (Users) listView.getItemAtPosition(i);
                 Intent intent = new Intent(getBaseContext(), SetRolesActivity.class);
-                intent.putExtra("userObject", (Serializable) user);
+                intent.putExtra("userObject",  user);
                 startActivity(intent);
             }
         });
@@ -79,7 +79,7 @@ public class UserActivity extends AppCompatActivity {
                         usersArrayAdapter = new ArrayAdapter<>(UserActivity.this, R.layout.support_simple_spinner_dropdown_item,
                                 usersList);
                         //listView.setAdapter(usersArrayAdapter);
-                        compatSpinner.setAdapter(usersArrayAdapter);
+                        listView.setAdapter(usersArrayAdapter);
                         Log.e("UsersActivity", "handleResponse: " + usersList.get(1).getName().toString());
                     }
                 }
