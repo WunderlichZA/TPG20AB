@@ -1,4 +1,4 @@
-package za.ac.cut.hockeyapplication;
+package za.ac.cut.hockeyapplication.activity;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -16,7 +16,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.backendless.Backendless;
-import com.backendless.BackendlessUser;
 import com.backendless.async.callback.AsyncCallback;
 import com.backendless.async.callback.BackendlessCallback;
 import com.backendless.exceptions.BackendlessFault;
@@ -26,7 +25,8 @@ import com.backendless.persistence.QueryOptions;
 import java.util.ArrayList;
 import java.util.List;
 
-import businesslayer.model.Users;
+import za.ac.cut.hockeyapplication.R;
+import za.ac.cut.hockeyapplication.model.Users;
 
 public class SetRolesActivity extends AppCompatActivity {
 
@@ -55,9 +55,9 @@ public class SetRolesActivity extends AppCompatActivity {
         buttonSelectUser = findViewById(R.id.button_select_user);
         rolesLayout = findViewById(R.id.roles_layout);
 
-        Intent intent  = getIntent();
+        Intent intent = getIntent();
         bundle = intent.getExtras();
-        if(bundle != null){
+        if (bundle != null) {
             loggedInUser = (Users) bundle.getSerializable("USER_OBJECT");
             loggedInUser.setRole(userRole);
             selectUser.setText(loggedInUser.getName() + " " + loggedInUser.getSurname());
@@ -65,7 +65,7 @@ public class SetRolesActivity extends AppCompatActivity {
     }
 
     public void showUsers(View view) {
-        switch (view.getId()){
+        switch (view.getId()) {
             case R.id.button_select_user:
                 startActivityForResult(new Intent(SetRolesActivity.this, UserItemsActivity.class), 1);
                 break;
@@ -102,7 +102,7 @@ public class SetRolesActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == REQUEST_CODE && resultCode == RESULT_OK){
+        if (requestCode == REQUEST_CODE && resultCode == RESULT_OK) {
             Bundle bundle = data.getExtras();
             loggedInUser = (Users) bundle.getSerializable("USER_OBJECT");
             loggedInUser.setRole(userRole);
@@ -152,27 +152,28 @@ public class SetRolesActivity extends AppCompatActivity {
 
     public void saveChanges(Users user) {
 
-//        user = (Users) bundle.getSerializable("USER_OBJECT");
-//        user.setRole(userRole);
-//        selectUser.setText(user.getName());
-
+        //        user = (Users) bundle.getSerializable("USER_OBJECT");
+        //        user.setRole(userRole);
+        //        selectUser.setText(user.getName());
 
         Backendless.Persistence.save(user, new AsyncCallback<Users>() {
             @Override
             public void handleResponse(Users response) {
                 Log.i("OnActivityResults", "handleResponse: " + response.getRole());
-                Toast.makeText(SetRolesActivity.this, "Role assigned successfully", Toast.LENGTH_LONG).show();
+                Toast.makeText(SetRolesActivity.this, "Role assigned successfully", Toast.LENGTH_LONG)
+                     .show();
             }
 
             @Override
             public void handleFault(BackendlessFault fault) {
                 Log.e("OnActivityResults", "handleFault: " + fault.getMessage());
-                Toast.makeText(SetRolesActivity.this, "" + fault.getMessage(), Toast.LENGTH_LONG).show();
+                Toast.makeText(SetRolesActivity.this, "" + fault.getMessage(), Toast.LENGTH_LONG)
+                     .show();
             }
         });
     }
 
-    public void getUser(){
+    public void getUser() {
         BackendlessDataQuery dataQuery = new BackendlessDataQuery();
         QueryOptions queryOptions = new QueryOptions();
     }

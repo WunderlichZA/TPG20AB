@@ -1,15 +1,13 @@
-package za.ac.cut.hockeyapplication;
+package za.ac.cut.hockeyapplication.fragment;
 
-
+import android.app.Fragment;
 import android.app.ProgressDialog;
 import android.os.Bundle;
-import android.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.LinearLayout;
 import android.widget.ListView;
 
 import com.backendless.Backendless;
@@ -18,8 +16,8 @@ import com.backendless.exceptions.BackendlessFault;
 
 import java.util.List;
 
-import businesslayer.model.Users;
-
+import za.ac.cut.hockeyapplication.R;
+import za.ac.cut.hockeyapplication.model.Users;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -35,12 +33,12 @@ public class ItemsFragment extends android.support.v4.app.Fragment {
         // Required empty public constructor
     }
 
-
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(
+            LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState
+    ) {
         // Inflate the layout for this fragment
-        View view =  inflater.inflate(R.layout.fragment_items, container, false);
+        View view = inflater.inflate(R.layout.fragment_items, container, false);
 
         listView = view.findViewById(R.id.list_view);
 
@@ -53,7 +51,7 @@ public class ItemsFragment extends android.support.v4.app.Fragment {
         loadUsers();
     }
 
-    public void loadUsers(){
+    public void loadUsers() {
         progressDialog = new ProgressDialog(getActivity());
         progressDialog.setMax(100);
         progressDialog.setMessage("Loading users");
@@ -86,5 +84,4 @@ public class ItemsFragment extends android.support.v4.app.Fragment {
             Log.e("Exception", "getUsers: " + e.getMessage());
         }
     }
-
 }

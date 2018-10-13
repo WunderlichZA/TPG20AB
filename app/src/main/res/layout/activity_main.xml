@@ -1,20 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout android:layout_height="match_parent"
-    android:layout_width="match_parent"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+                android:layout_width="match_parent"
+                xmlns:android="http://schemas.android.com/apk/res/android">
 
     <include
         android:id="@+id/hockeyToolbar"
-        layout="@layout/toolbar"/>
+        layout="@layout/toolbar" />
 
-    <ScrollView
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@+id/hockeyToolbar"
-        tools:context=".MainActivity">
+    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@+id/hockeyToolbar"
+                tools:context=".activity.MainActivity">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -33,18 +32,20 @@
                 android:layout_marginBottom="5dp"
                 app:srcCompat="@drawable/ic_hockey_app_logo"
                 tools:ignore="VectorDrawableCompat" />
+
             <TextView
                 android:id="@+id/logged_in_user"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:textStyle="bold"/>
+                android:textStyle="bold" />
+
             <TextView
                 android:id="@+id/role"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:textStyle="bold"/>
+                android:textStyle="bold" />
 
             <LinearLayout
                 android:id="@+id/admin_menu"
@@ -52,28 +53,30 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
                 android:orientation="vertical">
+
                 <android.support.design.button.MaterialButton
                     android:id="@+id/add_team_button"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Add Team / Opponent"/>
+                    android:text="Add Team / Opponent" />
 
                 <android.support.design.button.MaterialButton
                     android:id="@+id/move_players_button"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Move Players"/>
+                    android:text="Move Players" />
 
                 <android.support.design.button.MaterialButton
                     android:id="@+id/set_roles_button"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Set Roles"/>
+                    android:text="Set Roles" />
+
                 <android.support.design.button.MaterialButton
                     android:id="@+id/coach_menu_button"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Coach Menu"/>
+                    android:text="Coach Menu" />
             </LinearLayout>
 
             <LinearLayout
@@ -82,30 +85,31 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:visibility="gone">
+
                 <android.support.design.button.MaterialButton
                     android:id="@+id/add_player_button"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Add Player"/>
+                    android:text="Add Player" />
 
                 <android.support.design.button.MaterialButton
                     android:id="@+id/my_players_button"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="My Players"/>
+                    android:text="My Players" />
 
                 <android.support.design.button.MaterialButton
                     android:id="@+id/matches_button"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Matches"/>
+                    android:text="Matches" />
             </LinearLayout>
 
             <android.support.design.button.MaterialButton
                 android:id="@+id/logout_button"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Logout"/>
+                android:text="Logout" />
         </LinearLayout>
 
     </ScrollView>

@@ -1,4 +1,4 @@
-package businesslayer.model;
+package za.ac.cut.hockeyapplication.model;
 
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;

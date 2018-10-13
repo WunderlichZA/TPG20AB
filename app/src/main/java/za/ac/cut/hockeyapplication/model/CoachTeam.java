@@ -1,4 +1,4 @@
-package businesslayer.model;
+package za.ac.cut.hockeyapplication.model;
 
 import io.realm.annotations.PrimaryKey;
 
@@ -7,5 +7,5 @@ public class CoachTeam {
     @PrimaryKey
     private String coachTeamId;
     private Team team;
-    private Users users;
+    private businesslayer.model.Users users;
 }
