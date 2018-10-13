@@ -7,5 +7,5 @@ public class CoachTeam {
     @PrimaryKey
     private String coachTeamId;
     private Team team;
-    private businesslayer.model.Users users;
+    private Users users;
 }
