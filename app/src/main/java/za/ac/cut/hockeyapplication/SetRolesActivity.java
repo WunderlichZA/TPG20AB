@@ -9,7 +9,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.AppCompatSpinner;
 import android.util.Log;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
@@ -26,11 +25,12 @@ import java.util.List;
 
 import businesslayer.model.Users;
 
-public class SetRolesActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener{
+public class SetRolesActivity extends AppCompatActivity {
 
     private static int REQUEST_CODE = 1;
 
     List<Users> usersList = new ArrayList<>();
+    private Users loggedInUser;
     ArrayAdapter<Users> adapter = null;
     String userRole;
 
@@ -56,7 +56,9 @@ public class SetRolesActivity extends AppCompatActivity implements AdapterView.O
         buttonSaveChanges.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                selectUser.setText(user.getName());
+                if(loggedInUser != null){
+                    saveChanges(loggedInUser);
+                }
             }
         });
     }
@@ -93,24 +95,12 @@ public class SetRolesActivity extends AppCompatActivity implements AdapterView.O
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        Bundle bundle = data.getExtras();
-        Users user = (Users) bundle.getSerializable("USER_OBJECT");
-        user.setRole(userRole);
-        selectUser.setText(user.getName());
         if (requestCode == REQUEST_CODE) {
-            if(requestCode == RESULT_OK){
-
-//            Backendless.Persistence.save(user, new AsyncCallback<Users>() {
-//                @Override
-//                public void handleResponse(Users response) {
-//                    Log.i("OnActivityResults", "handleResponse: " + response.getRole());
-//                }
-//
-//                @Override
-//                public void handleFault(BackendlessFault fault) {
-//                    Log.e("OnActivityResults", "handleFault: " + fault.getMessage());
-//                }
-//            });
+            if (requestCode == RESULT_OK) {
+                Bundle bundle = data.getExtras();
+                loggedInUser = (Users) bundle.getSerializable("USER_OBJECT");
+                loggedInUser.setRole(userRole);
+                selectUser.setText(loggedInUser.getName());
             }
         }
     }
@@ -191,13 +181,18 @@ public class SetRolesActivity extends AppCompatActivity implements AdapterView.O
         }
     }
 
-    @Override
-    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-        Toast.makeText(SetRolesActivity.this, "dfgdfgh", Toast.LENGTH_LONG).show();
-    }
+    public void saveChanges(Users user) {
+        Backendless.Persistence.save(user, new AsyncCallback<Users>() {
+            @Override
+            public void handleResponse(Users response) {
+                Log.i("OnActivityResults", "handleResponse: " + response.getRole());
+                Toast.makeText(SetRolesActivity.this, "Role assigned successfully", Toast.LENGTH_LONG).show();
+            }
 
-    @Override
-    public void onNothingSelected(AdapterView<?> adapterView) {
-        Toast.makeText(SetRolesActivity.this, "Nothing", Toast.LENGTH_LONG).show();
+            @Override
+            public void handleFault(BackendlessFault fault) {
+                Log.e("OnActivityResults", "handleFault: " + fault.getMessage());
+            }
+        });
     }
 }
