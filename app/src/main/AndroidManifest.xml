@@ -27,7 +27,8 @@
             android:name=".SetRolesActivity"
             android:label="@string/activity_roles_title"
             android:theme="@style/HockeyAppTheme" />
-        <activity android:name=".UserActivity"/>
+        <activity android:name=".UserActivity" />
+        <activity android:name=".UserItemsActivity"></activity>
     </application>
 
 </manifest>
