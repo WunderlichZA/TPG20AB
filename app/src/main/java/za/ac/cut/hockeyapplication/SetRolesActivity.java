@@ -155,18 +155,18 @@ public class SetRolesActivity extends AppCompatActivity {
 //        selectUser.setText(user.getName());
 
 
-//        Backendless.Persistence.save(user, new AsyncCallback<Users>() {
-//            @Override
-//            public void handleResponse(Users response) {
-//                Log.i("OnActivityResults", "handleResponse: " + response.getRole());
-//                Toast.makeText(SetRolesActivity.this, "Role assigned successfully", Toast.LENGTH_LONG).show();
-//            }
-//
-//            @Override
-//            public void handleFault(BackendlessFault fault) {
-//                Log.e("OnActivityResults", "handleFault: " + fault.getMessage());
-//                Toast.makeText(SetRolesActivity.this, "" + fault.getMessage(), Toast.LENGTH_LONG).show();
-//            }
-//        });
+        Backendless.Persistence.save(user, new AsyncCallback<Users>() {
+            @Override
+            public void handleResponse(Users response) {
+                Log.i("OnActivityResults", "handleResponse: " + response.getRole());
+                Toast.makeText(SetRolesActivity.this, "Role assigned successfully", Toast.LENGTH_LONG).show();
+            }
+
+            @Override
+            public void handleFault(BackendlessFault fault) {
+                Log.e("OnActivityResults", "handleFault: " + fault.getMessage());
+                Toast.makeText(SetRolesActivity.this, "" + fault.getMessage(), Toast.LENGTH_LONG).show();
+            }
+        });
     }
 }
