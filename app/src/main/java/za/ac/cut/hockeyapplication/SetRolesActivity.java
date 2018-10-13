@@ -20,6 +20,8 @@ import com.backendless.BackendlessUser;
 import com.backendless.async.callback.AsyncCallback;
 import com.backendless.async.callback.BackendlessCallback;
 import com.backendless.exceptions.BackendlessFault;
+import com.backendless.persistence.BackendlessDataQuery;
+import com.backendless.persistence.QueryOptions;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -168,5 +170,10 @@ public class SetRolesActivity extends AppCompatActivity {
                 Toast.makeText(SetRolesActivity.this, "" + fault.getMessage(), Toast.LENGTH_LONG).show();
             }
         });
+    }
+
+    public void getUser(){
+        BackendlessDataQuery dataQuery = new BackendlessDataQuery();
+        QueryOptions queryOptions = new QueryOptions();
     }
 }
