@@ -1,15 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".RegisterActivity">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                tools:context=".activity.RegisterActivity">
 
     <include
         android:id="@+id/toolbar"
-        layout="@layout/toolbar"/>
+        layout="@layout/toolbar" />
 
     <ScrollView
         android:layout_width="match_parent"
@@ -32,11 +31,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Email">
+
                 <android.support.design.widget.TextInputEditText
                     android:id="@+id/email_edit_text"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:nextFocusDown="@id/name_edit_text"/>
+                    android:nextFocusDown="@id/name_edit_text" />
             </android.support.design.widget.TextInputLayout>
 
             <android.support.design.widget.TextInputLayout
@@ -45,11 +45,12 @@
                 android:layout_height="wrap_content"
                 android:hint="Name"
                 app:errorEnabled="true">
+
                 <android.support.design.widget.TextInputEditText
                     android:id="@+id/name_edit_text"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:nextFocusDown="@id/surname_edit_text"/>
+                    android:nextFocusDown="@id/surname_edit_text" />
             </android.support.design.widget.TextInputLayout>
 
             <android.support.design.widget.TextInputLayout
@@ -58,11 +59,12 @@
                 android:layout_height="wrap_content"
                 android:hint="Surname"
                 app:errorEnabled="true">
+
                 <android.support.design.widget.TextInputEditText
                     android:id="@+id/surname_edit_text"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:nextFocusDown="@id/password_edit_text"/>
+                    android:nextFocusDown="@id/password_edit_text" />
             </android.support.design.widget.TextInputLayout>
 
             <android.support.design.widget.TextInputLayout
@@ -71,12 +73,13 @@
                 android:layout_height="wrap_content"
                 android:hint="Password"
                 app:errorEnabled="true">
+
                 <android.support.design.widget.TextInputEditText
                     android:id="@+id/password_edit_text"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="textPassword"
-                    android:nextFocusDown="@id/password_confirm_edit_text"/>
+                    android:nextFocusDown="@id/password_confirm_edit_text" />
             </android.support.design.widget.TextInputLayout>
 
             <android.support.design.widget.TextInputLayout
@@ -85,19 +88,20 @@
                 android:layout_height="wrap_content"
                 android:hint="Confirm Password"
                 app:errorEnabled="true">
+
                 <android.support.design.widget.TextInputEditText
                     android:id="@+id/password_confirm_edit_text"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="textPassword"
-                    android:nextFocusDown="@id/button_register_user"/>
+                    android:nextFocusDown="@id/button_register_user" />
             </android.support.design.widget.TextInputLayout>
 
             <android.support.design.button.MaterialButton
                 android:id="@+id/button_register_user"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Register"/>
+                android:text="Register" />
 
         </LinearLayout>
     </ScrollView>

@@ -1,13 +1,11 @@
-package businesslayer.model;
-
-import android.os.Parcelable;
+package za.ac.cut.hockeyapplication.model;
 
 import java.io.Serializable;
 
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
 
-public class Users extends RealmObject implements Serializable{
+public class Users extends RealmObject implements Serializable {
 
     @PrimaryKey
     private String email;
@@ -61,6 +59,6 @@ public class Users extends RealmObject implements Serializable{
 
     @Override
     public String toString() {
-        return  name + " " + surname;
+        return name + " " + surname;
     }
 }

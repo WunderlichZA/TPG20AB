@@ -1,9 +1,9 @@
-package za.ac.cut.hockeyapplication;
+package za.ac.cut.hockeyapplication.activity;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.design.button.MaterialButton;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
@@ -13,6 +13,8 @@ import com.backendless.Backendless;
 import com.backendless.BackendlessUser;
 import com.backendless.async.callback.AsyncCallback;
 import com.backendless.exceptions.BackendlessFault;
+
+import za.ac.cut.hockeyapplication.R;
 
 public class RegisterActivity extends AppCompatActivity {
 
@@ -40,10 +42,10 @@ public class RegisterActivity extends AppCompatActivity {
                 password = edPassword.getText().toString();
                 confirmedPassword = edPassword.getText().toString();
 
-                if(TextUtils.isEmpty(password) &&
-                        TextUtils.isEmpty(confirmedPassword)){
-                    Toast.makeText(RegisterActivity.this, "Fields cannot be empty", Toast.LENGTH_LONG).show();
-                }else if(password.equalsIgnoreCase(confirmedPassword)){
+                if (TextUtils.isEmpty(password) && TextUtils.isEmpty(confirmedPassword)) {
+                    Toast.makeText(RegisterActivity.this, "Fields cannot be empty", Toast.LENGTH_LONG)
+                         .show();
+                } else if (password.equalsIgnoreCase(confirmedPassword)) {
                     user.setProperty("name", edName.getText().toString());
                     user.setProperty("surname", edSurname.getText().toString());
                     user.setProperty("email", edEmail.getText().toString());
@@ -52,20 +54,23 @@ public class RegisterActivity extends AppCompatActivity {
                     Backendless.UserService.register(user, new AsyncCallback<BackendlessUser>() {
                         @Override
                         public void handleResponse(BackendlessUser response) {
-                            Toast.makeText(RegisterActivity.this, "Registration successful", Toast.LENGTH_LONG).show();
+                            Toast.makeText(RegisterActivity.this, "Registration successful", Toast.LENGTH_LONG)
+                                 .show();
                             startActivity(new Intent(RegisterActivity.this, LoginActivity.class));
                             finish();
                         }
 
                         @Override
                         public void handleFault(BackendlessFault fault) {
-                            Toast.makeText(RegisterActivity.this, fault.getMessage(), Toast.LENGTH_LONG).show();
+                            Toast.makeText(RegisterActivity.this, fault.getMessage(), Toast.LENGTH_LONG)
+                                 .show();
                         }
                     });
 
                     //Toast.makeText(RegisterActivity.this, "Manyeke", Toast.LENGTH_LONG).show();
-                }else{
-                    Toast.makeText(RegisterActivity.this, "Password do not match", Toast.LENGTH_LONG).show();
+                } else {
+                    Toast.makeText(RegisterActivity.this, "Password do not match", Toast.LENGTH_LONG)
+                         .show();
                 }
             }
         });
