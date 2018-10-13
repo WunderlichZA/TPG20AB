@@ -84,15 +84,10 @@
                 android:id="@+id/save_changes_button"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:onClick="showUsers"
                 android:text="Save Changes" />
         </LinearLayout>
 
     </ScrollView>
-
-    <FrameLayout
-        android:id="@+id/container"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@+id/scrollView"></FrameLayout>
 
 </RelativeLayout>
