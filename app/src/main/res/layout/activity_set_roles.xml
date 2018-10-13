@@ -51,6 +51,7 @@
             
 
             <TextView
+                android:id="@+id/roleText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
@@ -83,6 +84,7 @@
                 android:id="@+id/save_changes_button"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:onClick="showUsers"
                 android:text="Save Changes" />
         </LinearLayout>
 

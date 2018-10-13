@@ -9,15 +9,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.AppCompatSpinner;
 import android.util.Log;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
-import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.backendless.Backendless;
+import com.backendless.BackendlessUser;
 import com.backendless.async.callback.AsyncCallback;
 import com.backendless.async.callback.BackendlessCallback;
 import com.backendless.exceptions.BackendlessFault;
@@ -27,11 +26,12 @@ import java.util.List;
 
 import businesslayer.model.Users;
 
-public class SetRolesActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
+public class SetRolesActivity extends AppCompatActivity {
 
     private static int REQUEST_CODE = 1;
 
     List<Users> usersList = new ArrayList<>();
+    private Users loggedInUser;
     ArrayAdapter<Users> adapter = null;
     String userRole;
 
@@ -41,7 +41,7 @@ public class SetRolesActivity extends AppCompatActivity implements AdapterView.O
     TextView errorMessage, selectUser;
     MaterialButton buttonSaveChanges, buttonSelectUser;
 
-    Users user;
+    Bundle bundle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,13 +49,28 @@ public class SetRolesActivity extends AppCompatActivity implements AdapterView.O
         setContentView(R.layout.activity_set_roles);
 
         buttonSaveChanges = findViewById(R.id.save_changes_button);
+        selectUser = findViewById(R.id.roleText);
         buttonSelectUser = findViewById(R.id.button_select_user);
         rolesLayout = findViewById(R.id.roles_layout);
-        //rolesLayout.setVisibility(View.GONE);
+
+        Intent intent  = getIntent();
+        bundle = intent.getExtras();
+        if(bundle != null){
+            loggedInUser = (Users) bundle.getSerializable("USER_OBJECT");
+            loggedInUser.setRole(userRole);
+            selectUser.setText(loggedInUser.getName() + " " + loggedInUser.getSurname());
+        }
     }
 
-    public void showUsers(View view){
-        startActivity(new Intent(SetRolesActivity.this, UserActivity.class));
+    public void showUsers(View view) {
+        switch (view.getId()){
+            case R.id.button_select_user:
+                startActivityForResult(new Intent(SetRolesActivity.this, UserItemsActivity.class), 1);
+                break;
+            case R.id.save_changes_button:
+                saveChanges(loggedInUser);
+                break;
+        }
     }
 
     public void onRadioButtonClicked(View view) {
@@ -68,82 +83,37 @@ public class SetRolesActivity extends AppCompatActivity implements AdapterView.O
                 if (checked)
                     // User is Admin
                     userRole = "ADMIN";
-                    break;
+                break;
             case R.id.radio_coach:
                 if (checked)
                     // User ia Coach
                     userRole = "COACH";
-                    break;
+                break;
             case R.id.radio_none:
                 if (checked)
                     // User has no access to the app
                     userRole = "NONE";
-                    break;
+                break;
         }
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode == REQUEST_CODE) {
-            Users user =  (Users) data.getExtras().get("userObject");
-            user.setRole(userRole);
-            Backendless.Persistence.save(user, new AsyncCallback<Users>() {
-                @Override
-                public void handleResponse(Users response) {
-                    Log.i("OnActivityResults", "handleResponse: " + response.getRole());
-                }
-
-                @Override
-                public void handleFault(BackendlessFault fault) {
-                    Log.e("OnActivityResults", "handleFault: " + fault.getMessage() );
-                }
-            });
+        if (requestCode == REQUEST_CODE && resultCode == RESULT_OK){
+            Bundle bundle = data.getExtras();
+            loggedInUser = (Users) bundle.getSerializable("USER_OBJECT");
+            loggedInUser.setRole(userRole);
+            selectUser.setText(loggedInUser.getName());
         }
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        //loadUsers();
     }
 
-    public void getUsers() {
-
-        try {
-
-            Backendless.Data.of(Users.class).find(new BackendlessCallback<List<Users>>() {
-                @Override
-                public void handleResponse(List<Users> response) {
-                    usersList = response;
-
-                    Log.e("Tag", "handleResponse: " + usersList.get(1).getName().toString());
-                }
-
-                @Override
-                public void handleFault(BackendlessFault fault) {
-                    super.handleFault(fault);
-                    Log.e("Tag", "handleResponse: " + fault.getMessage());
-                }
-            });
-//            Backendless.Persistence.of("Users").find(new BackendlessCallback<List<Map>>() {
-//                @Override
-//                public void handleResponse(List<Map> response) {
-//                    Log.i("set roles", "handleResponse" + response.size());
-//                }
-//
-//                @Override
-//                public void handleFault(BackendlessFault fault) {
-//                    super.handleFault(fault);
-//                    Log.e("set roles", "handleFault: " + fault.getMessage());
-//                }
-//            });
-        } catch (Exception e) {
-            Log.e("Exception", "getUsers: " + e.getMessage());
-        }
-    }
-
-    public void loadUsers(){
+    public void loadUsers() {
         progressDialog = new ProgressDialog(SetRolesActivity.this);
         progressDialog.setMax(100);
         progressDialog.setMessage("Loading users");
@@ -178,13 +148,25 @@ public class SetRolesActivity extends AppCompatActivity implements AdapterView.O
         }
     }
 
-    @Override
-    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-        Toast.makeText(SetRolesActivity.this, "dfgdfgh", Toast.LENGTH_LONG).show();
-    }
+    public void saveChanges(Users user) {
 
-    @Override
-    public void onNothingSelected(AdapterView<?> adapterView) {
-        Toast.makeText(SetRolesActivity.this, "Nothing", Toast.LENGTH_LONG).show();
+//        user = (Users) bundle.getSerializable("USER_OBJECT");
+//        user.setRole(userRole);
+//        selectUser.setText(user.getName());
+
+
+//        Backendless.Persistence.save(user, new AsyncCallback<Users>() {
+//            @Override
+//            public void handleResponse(Users response) {
+//                Log.i("OnActivityResults", "handleResponse: " + response.getRole());
+//                Toast.makeText(SetRolesActivity.this, "Role assigned successfully", Toast.LENGTH_LONG).show();
+//            }
+//
+//            @Override
+//            public void handleFault(BackendlessFault fault) {
+//                Log.e("OnActivityResults", "handleFault: " + fault.getMessage());
+//                Toast.makeText(SetRolesActivity.this, "" + fault.getMessage(), Toast.LENGTH_LONG).show();
+//            }
+//        });
     }
 }

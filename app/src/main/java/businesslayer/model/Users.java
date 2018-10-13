@@ -1,9 +1,13 @@
 package businesslayer.model;
 
+import android.os.Parcelable;
+
+import java.io.Serializable;
+
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
 
-public class Users extends RealmObject{
+public class Users extends RealmObject implements Serializable{
 
     @PrimaryKey
     private String email;
