@@ -13,7 +13,6 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
-import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -27,7 +26,7 @@ import java.util.List;
 
 import businesslayer.model.Users;
 
-public class SetRolesActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
+public class SetRolesActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener{
 
     private static int REQUEST_CODE = 1;
 
@@ -49,13 +48,22 @@ public class SetRolesActivity extends AppCompatActivity implements AdapterView.O
         setContentView(R.layout.activity_set_roles);
 
         buttonSaveChanges = findViewById(R.id.save_changes_button);
+        selectUser = findViewById(R.id.roleText);
         buttonSelectUser = findViewById(R.id.button_select_user);
         rolesLayout = findViewById(R.id.roles_layout);
         //rolesLayout.setVisibility(View.GONE);
+
+        buttonSaveChanges.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                selectUser.setText(user.getName());
+            }
+        });
     }
 
-    public void showUsers(View view){
-        startActivity(new Intent(SetRolesActivity.this, UserActivity.class));
+    public void showUsers(View view) {
+        startActivityForResult(new Intent(SetRolesActivity.this, UserItemsActivity.class), 1);
+        //startActivity(new Intent(SetRolesActivity.this, RegisterActivity.class));
     }
 
     public void onRadioButtonClicked(View view) {
@@ -68,37 +76,42 @@ public class SetRolesActivity extends AppCompatActivity implements AdapterView.O
                 if (checked)
                     // User is Admin
                     userRole = "ADMIN";
-                    break;
+                break;
             case R.id.radio_coach:
                 if (checked)
                     // User ia Coach
                     userRole = "COACH";
-                    break;
+                break;
             case R.id.radio_none:
                 if (checked)
                     // User has no access to the app
                     userRole = "NONE";
-                    break;
+                break;
         }
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode == REQUEST_CODE) {
-            Users user =  (Users) data.getExtras().get("userObject");
-            user.setRole(userRole);
-            Backendless.Persistence.save(user, new AsyncCallback<Users>() {
-                @Override
-                public void handleResponse(Users response) {
-                    Log.i("OnActivityResults", "handleResponse: " + response.getRole());
-                }
+        Bundle bundle = data.getExtras();
+        Users user = (Users) bundle.getSerializable("USER_OBJECT");
+        user.setRole(userRole);
+        selectUser.setText(user.getName());
+        if (requestCode == REQUEST_CODE) {
+            if(requestCode == RESULT_OK){
 
-                @Override
-                public void handleFault(BackendlessFault fault) {
-                    Log.e("OnActivityResults", "handleFault: " + fault.getMessage() );
-                }
-            });
+//            Backendless.Persistence.save(user, new AsyncCallback<Users>() {
+//                @Override
+//                public void handleResponse(Users response) {
+//                    Log.i("OnActivityResults", "handleResponse: " + response.getRole());
+//                }
+//
+//                @Override
+//                public void handleFault(BackendlessFault fault) {
+//                    Log.e("OnActivityResults", "handleFault: " + fault.getMessage());
+//                }
+//            });
+            }
         }
     }
 
@@ -143,7 +156,7 @@ public class SetRolesActivity extends AppCompatActivity implements AdapterView.O
         }
     }
 
-    public void loadUsers(){
+    public void loadUsers() {
         progressDialog = new ProgressDialog(SetRolesActivity.this);
         progressDialog.setMax(100);
         progressDialog.setMessage("Loading users");
