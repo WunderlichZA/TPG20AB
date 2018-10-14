@@ -55,11 +55,15 @@ public class LoginActivity extends AppCompatActivity {
                         @Override
                         public void handleResponse(BackendlessUser response) {
                             String role = response.getProperty(UserHelper.PROPERTY_ROLE).toString();
-                            if (role.equalsIgnoreCase(UserHelper.ROLE_NONE)) {
-                                Toast.makeText(LoginActivity.this, "Ask your Admin to assign you a role for you to use this app", Toast.LENGTH_LONG)
-                                     .show();
-                            } else {
+                            if(role.equalsIgnoreCase(UserHelper.ROLE_ADMIN)){
                                 startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                                finish();
+                            }
+                            if (role.equalsIgnoreCase(UserHelper.ROLE_NONE)) {
+                                Toast.makeText(LoginActivity.this, "Ask your Admin to assign you a role for you to use this app", Toast.LENGTH_LONG).show();
+                            }
+                            if(role.equalsIgnoreCase(UserHelper.ROLE_COACH)){
+                                startActivity(new Intent(LoginActivity.this, CoachMenuActivity.class));
                                 finish();
                             }
                         }
