@@ -1,6 +1,5 @@
 package za.ac.cut.hockeyapplication.model;
 
-
 public class Team {
 
     private int ObjectId;

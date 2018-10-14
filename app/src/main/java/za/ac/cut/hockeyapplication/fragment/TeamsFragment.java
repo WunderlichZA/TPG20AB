@@ -65,11 +65,10 @@ public class TeamsFragment extends BaseFragment {
             public void handleFault(BackendlessFault fault) {
                 hideLoadingProgress();
                 // TODO
-                if(fault != null) {
+                if (fault != null) {
                     Log.e("Teams", "Error: " + fault.getMessage());
                 }
             }
         });
     }
-
 }

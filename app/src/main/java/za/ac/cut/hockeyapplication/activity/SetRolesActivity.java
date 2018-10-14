@@ -45,7 +45,7 @@ public class SetRolesActivity extends AppCompatActivity {
     public void showUsers(View view) {
         switch (view.getId()) {
             case R.id.button_select_user:
-                startActivityForResult(new Intent(SetRolesActivity.this, UserItemsActivity.class), 1);
+                startActivityForResult(new Intent(SetRolesActivity.this, SelectUserActivity.class), 1);
                 break;
             case R.id.save_changes_button:
                 saveChanges(loggedInUser);
@@ -105,13 +105,16 @@ public class SetRolesActivity extends AppCompatActivity {
                     Backendless.UserService.update(userObj, new AsyncCallback<BackendlessUser>() {
                         @Override
                         public void handleResponse(BackendlessUser updateUser) {
-                            Log.i("update user", "handleResponse: " + updateUser.getProperty("role").toString());
-                            Toast.makeText(SetRolesActivity.this, "Role successfully assigned.", Toast.LENGTH_LONG).show();
+                            Log.i("update user", "handleResponse: " + updateUser.getProperty("role")
+                                                                                .toString());
+                            Toast.makeText(SetRolesActivity.this, "Role successfully assigned.", Toast.LENGTH_LONG)
+                                 .show();
                         }
 
                         @Override
                         public void handleFault(BackendlessFault fault) {
-                            Toast.makeText(SetRolesActivity.this, fault.getMessage(), Toast.LENGTH_LONG).show();
+                            Toast.makeText(SetRolesActivity.this, fault.getMessage(), Toast.LENGTH_LONG)
+                                 .show();
                         }
                     });
                 }
@@ -119,14 +122,14 @@ public class SetRolesActivity extends AppCompatActivity {
                 @Override
                 public void handleFault(BackendlessFault fault) {
                     Log.e("user update", "handleFault: " + fault.getMessage());
-
                 }
             });
-        }else if(userRole == null){
-            Toast.makeText(SetRolesActivity.this, "A role must be selected.", Toast.LENGTH_LONG).show();
-        }else{
-            Toast.makeText(SetRolesActivity.this, "User must be selected.", Toast.LENGTH_LONG).show();
+        } else if (userRole == null) {
+            Toast.makeText(SetRolesActivity.this, "A role must be selected.", Toast.LENGTH_LONG)
+                 .show();
+        } else {
+            Toast.makeText(SetRolesActivity.this, "User must be selected.", Toast.LENGTH_LONG)
+                 .show();
         }
-
     }
 }

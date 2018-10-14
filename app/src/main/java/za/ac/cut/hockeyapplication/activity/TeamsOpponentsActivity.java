@@ -21,6 +21,9 @@ import za.ac.cut.hockeyapplication.fragment.TeamsFragment;
 
 public class TeamsOpponentsActivity extends AppCompatActivity implements ViewPager.OnPageChangeListener {
 
+    private static final int TAB_TEAMS_POSITION = 0;
+    private static final int TAB_OPPONENTS_POSITION = 1;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,13 +32,13 @@ public class TeamsOpponentsActivity extends AppCompatActivity implements ViewPag
         // Set toolbar
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        if(getSupportActionBar() != null) {
+        if (getSupportActionBar() != null) {
             getSupportActionBar().setTitle(R.string.title_teams_opponents);
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
 
         // Init view pager
-        ViewPager viewPager = findViewById(R.id.view_pager);
+        final ViewPager viewPager = findViewById(R.id.view_pager);
         viewPager.addOnPageChangeListener(this);
         viewPager.setAdapter(new ViewPagerAdapter(getFragments(), getSupportFragmentManager()));
 
@@ -48,10 +51,19 @@ public class TeamsOpponentsActivity extends AppCompatActivity implements ViewPag
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // TODO
+                int currentTabPosition = viewPager.getCurrentItem();
+                switch (currentTabPosition) {
+                    case TAB_TEAMS_POSITION:
+                        AddTeamActivity.start(TeamsOpponentsActivity.this);
+                        break;
+                    case TAB_OPPONENTS_POSITION:
+                        AddOpponentActivity.start(TeamsOpponentsActivity.this);
+                        break;
+                }
             }
         });
     }
+
     private List<Fragment> getFragments() {
         List<Fragment> fragments = new ArrayList<>();
         fragments.add(new TeamsFragment());

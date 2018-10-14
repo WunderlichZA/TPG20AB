@@ -36,12 +36,22 @@
             android:name=".activity.UserActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activity.UserItemsActivity"
+            android:name=".activity.SelectUserActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".activity.TeamsOpponentsActivity"
             android:label="@string/title_activity_teams_opponents"
             android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.AddTeamActivity"
+            android:label="@string/title_activity_add_team"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
+        <activity
+            android:name=".activity.AddOpponentActivity"
+            android:label="@string/title_activity_add_opponent"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
     </application>
 
 </manifest>

@@ -18,4 +18,6 @@
     <string name="teams_fragment_title">Teams</string>
     <string name="opponents_fragment_title">Opponents</string>
     <string name="title_teams_opponents">Teams and Opponents</string>
+    <string name="title_activity_add_team">AddTeamActivity</string>
+    <string name="title_activity_add_opponent">AddOpponentActivity</string>
 </resources>

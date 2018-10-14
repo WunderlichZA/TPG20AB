@@ -1,6 +1,5 @@
 package za.ac.cut.hockeyapplication.model;
 
-
 public class CoachTeam {
 
     private String objectId;

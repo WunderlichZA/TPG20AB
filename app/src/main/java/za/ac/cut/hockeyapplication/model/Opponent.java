@@ -1,7 +1,5 @@
 package za.ac.cut.hockeyapplication.model;
 
-
-
 public class Opponent {
 
     private String objectId;

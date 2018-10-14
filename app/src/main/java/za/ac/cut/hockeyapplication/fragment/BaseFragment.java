@@ -29,7 +29,7 @@ public abstract class BaseFragment extends Fragment {
     }
 
     protected void showLoadingProgress() {
-        dialog  = new Dialog(requireActivity());
+        dialog = new Dialog(requireActivity());
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setCancelable(false);
         dialog.setContentView(R.layout.loading_dialog_layout);
