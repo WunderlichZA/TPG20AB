@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import za.ac.cut.hockeyapplication.R;
@@ -14,10 +15,11 @@ import za.ac.cut.hockeyapplication.model.Team;
 
 public class TeamsAdapter extends RecyclerView.Adapter<TeamsAdapter.TeamViewHolder> {
 
-    private List<Team> teams;
+    private TeamClickListener teamClickListener;
+    private List<Team> teams = new ArrayList<>();
 
-    public TeamsAdapter(List<Team> teams) {
-        this.teams = teams;
+    public TeamsAdapter(TeamClickListener teamClickListener) {
+        this.teamClickListener = teamClickListener;
     }
 
     @NonNull
@@ -27,7 +29,7 @@ public class TeamsAdapter extends RecyclerView.Adapter<TeamsAdapter.TeamViewHold
     ) {
         LayoutInflater inflater = LayoutInflater.from(viewGroup.getContext());
         View view = inflater.inflate(R.layout.team_row_layout, viewGroup, false);
-        return new TeamsAdapter.TeamViewHolder(view);
+        return new TeamsAdapter.TeamViewHolder(view, teamClickListener);
     }
 
     @Override
@@ -45,17 +47,34 @@ public class TeamsAdapter extends RecyclerView.Adapter<TeamsAdapter.TeamViewHold
         notifyDataSetChanged();
     }
 
+    public interface TeamClickListener {
+        void onTeamClick(Team team);
+    }
+
     class TeamViewHolder extends RecyclerView.ViewHolder {
 
+        private TeamClickListener teamClickListener;
         private TextView name;
+        private Team team;
 
-        public TeamViewHolder(@NonNull View itemView) {
+        public TeamViewHolder(@NonNull View itemView, TeamClickListener clickListener) {
             super(itemView);
 
+            this.teamClickListener = clickListener;
             name = itemView.findViewById(R.id.name);
+            name.setClickable(teamClickListener != null);
+            name.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if (teamClickListener != null && team != null) {
+                        teamClickListener.onTeamClick(team);
+                    }
+                }
+            });
         }
 
         public void bind(Team team) {
+            this.team = team;
             name.setText(team.getTeamName());
         }
     }

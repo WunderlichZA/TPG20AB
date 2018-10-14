@@ -11,16 +11,26 @@ import com.backendless.Backendless;
 import com.backendless.async.callback.BackendlessCallback;
 import com.backendless.exceptions.BackendlessFault;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import za.ac.cut.hockeyapplication.R;
+import za.ac.cut.hockeyapplication.activity.SelectTeamActivity;
 import za.ac.cut.hockeyapplication.adapter.TeamsAdapter;
 import za.ac.cut.hockeyapplication.model.Team;
 
-public class TeamsFragment extends BaseFragment {
+public class TeamsFragment extends BaseFragment implements TeamsAdapter.TeamClickListener {
+    public static final String TAG = TeamsFragment.class.getSimpleName();
+    public static final String EXTRA_SELECTABLE = "EXTRA_SELECTABLE";
 
     private TeamsAdapter adapter;
+
+    public static TeamsFragment newInstance(boolean selectable) {
+        Bundle args = new Bundle();
+        args.putBoolean(EXTRA_SELECTABLE, selectable);
+        TeamsFragment fragment = new TeamsFragment();
+        fragment.setArguments(args);
+        return fragment;
+    }
 
     @Override
     public View onCreateView(
@@ -28,9 +38,14 @@ public class TeamsFragment extends BaseFragment {
     ) {
         View rootView = inflater.inflate(R.layout.fragment_teams, container, false);
 
+        boolean selectable = false;
+        if (getArguments().containsKey(EXTRA_SELECTABLE)) {
+            selectable = getArguments().getBoolean(EXTRA_SELECTABLE);
+        }
+
         // Init recycler view
         RecyclerView recyclerView = rootView.findViewById(R.id.teams_recycler_view);
-        adapter = new TeamsAdapter(new ArrayList<Team>());
+        adapter = new TeamsAdapter(selectable ? this : null);
         recyclerView.setAdapter(adapter);
 
         return rootView;
@@ -70,5 +85,12 @@ public class TeamsFragment extends BaseFragment {
                 }
             }
         });
+    }
+
+    @Override
+    public void onTeamClick(Team team) {
+        if (team != null && requireActivity() instanceof SelectTeamActivity) {
+            ((SelectTeamActivity) requireActivity()).setResult(team);
+        }
     }
 }

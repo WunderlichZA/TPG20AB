@@ -69,8 +69,8 @@ public class TeamsOpponentsActivity extends AppCompatActivity implements ViewPag
 
     private List<Fragment> getFragments() {
         List<Fragment> fragments = new ArrayList<>();
-        fragments.add(new TeamsFragment());
-        fragments.add(new OpponentsFragment());
+        fragments.add(TeamsFragment.newInstance(false));
+        fragments.add(OpponentsFragment.newInstance(false));
         return fragments;
     }
 

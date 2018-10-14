@@ -18,11 +18,10 @@ public class CoachMenuActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_coach_menu);
-
     }
 
-    public void onButtonClicked(View v){
-        if(v.getId() == R.id.button_logout_coach){
+    public void onButtonClicked(View v) {
+        if (v.getId() == R.id.button_logout_coach) {
             logout();
         }
     }
@@ -36,7 +35,8 @@ public class CoachMenuActivity extends BaseActivity {
 
             @Override
             public void handleFault(BackendlessFault fault) {
-                Toast.makeText(CoachMenuActivity.this, fault.getMessage(), Toast.LENGTH_LONG).show();
+                Toast.makeText(CoachMenuActivity.this, fault.getMessage(), Toast.LENGTH_LONG)
+                     .show();
             }
         });
     }

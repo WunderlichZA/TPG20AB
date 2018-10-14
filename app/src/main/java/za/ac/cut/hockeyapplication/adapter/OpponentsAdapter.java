@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import za.ac.cut.hockeyapplication.R;
@@ -14,10 +15,11 @@ import za.ac.cut.hockeyapplication.model.Opponent;
 
 public class OpponentsAdapter extends RecyclerView.Adapter<OpponentsAdapter.OpponentsViewHolder> {
 
-    private List<Opponent> opponents;
+    private OpponentsClickListener opponentsClickListener;
+    private List<Opponent> opponents = new ArrayList<>();
 
-    public OpponentsAdapter(List<Opponent> opponents) {
-        this.opponents = opponents;
+    public OpponentsAdapter(OpponentsClickListener opponentsClickListener) {
+        this.opponentsClickListener = opponentsClickListener;
     }
 
     @NonNull
@@ -27,7 +29,7 @@ public class OpponentsAdapter extends RecyclerView.Adapter<OpponentsAdapter.Oppo
     ) {
         LayoutInflater inflater = LayoutInflater.from(viewGroup.getContext());
         View view = inflater.inflate(R.layout.opponents_row_layout, viewGroup, false);
-        return new OpponentsAdapter.OpponentsViewHolder(view);
+        return new OpponentsAdapter.OpponentsViewHolder(view, opponentsClickListener);
     }
 
     @Override
@@ -47,17 +49,34 @@ public class OpponentsAdapter extends RecyclerView.Adapter<OpponentsAdapter.Oppo
         notifyDataSetChanged();
     }
 
+    public interface OpponentsClickListener {
+        void onOpponentClick(Opponent opponent);
+    }
+
     class OpponentsViewHolder extends RecyclerView.ViewHolder {
 
+        private OpponentsClickListener opponentsClickListener;
         private TextView name;
+        private Opponent opponent;
 
-        public OpponentsViewHolder(@NonNull View itemView) {
+        public OpponentsViewHolder(@NonNull View itemView, OpponentsClickListener clickListener) {
             super(itemView);
 
+            this.opponentsClickListener = clickListener;
             name = itemView.findViewById(R.id.name);
+            name.setClickable(opponentsClickListener != null);
+            name.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if (opponentsClickListener != null && opponent != null) {
+                        opponentsClickListener.onOpponentClick(opponent);
+                    }
+                }
+            });
         }
 
         public void bind(Opponent opponent) {
+            this.opponent = opponent;
             name.setText(opponent.getName());
         }
     }

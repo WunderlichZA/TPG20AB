@@ -12,16 +12,26 @@ import com.backendless.Backendless;
 import com.backendless.async.callback.BackendlessCallback;
 import com.backendless.exceptions.BackendlessFault;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import za.ac.cut.hockeyapplication.R;
+import za.ac.cut.hockeyapplication.activity.SelectOpponentActivity;
 import za.ac.cut.hockeyapplication.adapter.OpponentsAdapter;
 import za.ac.cut.hockeyapplication.model.Opponent;
 
-public class OpponentsFragment extends BaseFragment {
+public class OpponentsFragment extends BaseFragment implements OpponentsAdapter.OpponentsClickListener {
+    public static final String TAG = OpponentsFragment.class.getSimpleName();
+    public static final String EXTRA_SELECTABLE = "EXTRA_SELECTABLE";
 
     private OpponentsAdapter adapter;
+
+    public static TeamsFragment newInstance(boolean selectable) {
+        Bundle args = new Bundle();
+        args.putBoolean(EXTRA_SELECTABLE, selectable);
+        TeamsFragment fragment = new TeamsFragment();
+        fragment.setArguments(args);
+        return fragment;
+    }
 
     @Override
     public View onCreateView(
@@ -29,9 +39,14 @@ public class OpponentsFragment extends BaseFragment {
     ) {
         View rootView = inflater.inflate(R.layout.fragment_opponents, container, false);
 
+        boolean selectable = false;
+        if (getArguments().containsKey(EXTRA_SELECTABLE)) {
+            selectable = getArguments().getBoolean(EXTRA_SELECTABLE);
+        }
+
         // Init recycler view
         RecyclerView recyclerView = rootView.findViewById(R.id.opponents_recycler_view);
-        adapter = new OpponentsAdapter(new ArrayList<Opponent>());
+        adapter = new OpponentsAdapter(selectable ? this : null);
         recyclerView.setAdapter(adapter);
 
         return rootView;
@@ -76,5 +91,12 @@ public class OpponentsFragment extends BaseFragment {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         Log.e("Add Opp", "onActivityResult");
+    }
+
+    @Override
+    public void onOpponentClick(Opponent opponent) {
+        if (opponent != null && requireActivity() instanceof SelectOpponentActivity) {
+            ((SelectOpponentActivity) requireActivity()).setResult(opponent);
+        }
     }
 }
