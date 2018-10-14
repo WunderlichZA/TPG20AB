@@ -1,6 +1,8 @@
 package za.ac.cut.hockeyapplication.model;
 
-public class CoachTeam {
+import java.io.Serializable;
+
+public class CoachTeam implements Serializable {
 
     private String objectId;
     private Team team;

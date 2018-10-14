@@ -59,6 +59,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Team Coach"
+                android:clickable="true"
+                android:focusable="true"
                 app:layout_constraintTop_toBottomOf="@id/age_group_container">
 
                 <android.support.design.widget.TextInputEditText
@@ -68,14 +70,15 @@
                     android:clickable="false"
                     android:enabled="false"
                     android:focusable="false"
+                    android:longClickable="false"
                     android:focusableInTouchMode="false" />
             </android.support.design.widget.TextInputLayout>
 
             <android.support.design.widget.TextInputLayout
                 android:id="@+id/team_name_text_input"
+                android:layout_marginTop="8dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-
                 android:hint="Team Name"
                 app:layout_constraintTop_toBottomOf="@id/coach_name_text_input">
 

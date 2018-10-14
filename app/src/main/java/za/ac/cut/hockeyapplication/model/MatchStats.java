@@ -1,10 +1,10 @@
 package za.ac.cut.hockeyapplication.model;
 
-
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.List;
 
-public class MatchStats {
+public class MatchStats implements Serializable {
 
     private String objectId;
     private String firstHalfTurnOvers;
@@ -97,8 +97,8 @@ public class MatchStats {
         this.matches = matches;
     }
 
-    public HashMap toMap(){
-        HashMap matchStats =  new HashMap();
+    public HashMap toMap() {
+        HashMap matchStats = new HashMap();
         matchStats.put("circlePenetrations", this.circlePenetration);
         matchStats.put("firstHalfGoals", this.firstHalfGoals);
         matchStats.put("matches", this.matches);

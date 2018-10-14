@@ -1,9 +1,10 @@
 package za.ac.cut.hockeyapplication.model;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.List;
 
-public class MatchLineUp {
+public class MatchLineUp implements Serializable {
 
     private String objectId;
     private Opponent opponent;
@@ -78,8 +79,8 @@ public class MatchLineUp {
         this.teamRating = teamRating;
     }
 
-    public HashMap toMap(){
-        HashMap matchLineUp =  new HashMap();
+    public HashMap toMap() {
+        HashMap matchLineUp = new HashMap();
         matchLineUp.put("goals", this.goals);
         matchLineUp.put("match", this.match);
         matchLineUp.put("playerPosition", this.playerPosition);

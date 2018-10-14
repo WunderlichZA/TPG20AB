@@ -1,7 +1,5 @@
 package za.ac.cut.hockeyapplication.model;
 
-import android.service.autofill.FieldClassification;
-
 import java.io.Serializable;
 import java.util.HashMap;
 import java.util.List;
@@ -84,8 +82,8 @@ public class Users implements Serializable {
         this.matches = matches;
     }
 
-    public HashMap toMap(){
-        HashMap user =  new HashMap();
+    public HashMap toMap() {
+        HashMap user = new HashMap();
         user.put("surname", this.surname);
         user.put("name", this.name);
         user.put("password", this.password);

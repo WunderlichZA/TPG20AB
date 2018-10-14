@@ -1,8 +1,9 @@
 package za.ac.cut.hockeyapplication.model;
 
+import java.io.Serializable;
 import java.util.HashMap;
 
-public class MedicalInfo {
+public class MedicalInfo implements Serializable {
 
     private String objectId;
     private String medicalAidName;
@@ -77,8 +78,8 @@ public class MedicalInfo {
         this.player = player;
     }
 
-    public HashMap toMap(){
-        HashMap medicalInfo =  new HashMap();
+    public HashMap toMap() {
+        HashMap medicalInfo = new HashMap();
         medicalInfo.put("allergies", this.allergies);
         medicalInfo.put("firstParentPhoneNumber", this.parentOneCellNumber);
         medicalInfo.put("medical_aid_number", this.medicalAidNumber);

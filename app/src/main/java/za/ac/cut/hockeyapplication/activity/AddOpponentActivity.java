@@ -7,14 +7,18 @@ import android.support.design.button.MaterialButton;
 import android.support.design.widget.TextInputEditText;
 import android.support.design.widget.TextInputLayout;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 
+import com.backendless.Backendless;
+import com.backendless.async.callback.AsyncCallback;
+import com.backendless.exceptions.BackendlessFault;
+
 import za.ac.cut.hockeyapplication.R;
+import za.ac.cut.hockeyapplication.model.Opponent;
 
-public class AddOpponentActivity extends Activity {
-
-    public static final int RC_ADD_OPPONENT = 200;
-    public static final String EXTRA_OPPONENT = "EXTRA_OPPONENT";
+public class AddOpponentActivity extends BaseActivity {
+    private static final String TAG = AddOpponentActivity.class.getSimpleName();
 
     private TextInputEditText opponentNameEditText;
 
@@ -41,10 +45,28 @@ public class AddOpponentActivity extends Activity {
     }
 
     private void saveOpponent(String opponentName) {
+        showLoadingProgress();
 
+        Opponent opponent = new Opponent();
+        opponent.setName(opponentName);
+
+        Backendless.Data.of(Opponent.class).save(opponent, new AsyncCallback<Opponent>() {
+            @Override
+            public void handleResponse(Opponent response) {
+                hideLoadingProgress();
+                finish();
+            }
+
+            @Override
+            public void handleFault(BackendlessFault fault) {
+                hideLoadingProgress();
+                Log.e(TAG, "Error: " + fault.getMessage());
+                // TODO
+            }
+        });
     }
 
     public static void start(Activity activity) {
-        activity.startActivityForResult(new Intent(activity, AddOpponentActivity.class), RC_ADD_OPPONENT);
+        activity.startActivity(new Intent(activity, AddOpponentActivity.class));
     }
 }

@@ -1,5 +1,6 @@
 package za.ac.cut.hockeyapplication.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -70,5 +71,10 @@ public class OpponentsFragment extends BaseFragment {
                 }
             }
         });
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        Log.e("Add Opp", "onActivityResult");
     }
 }
