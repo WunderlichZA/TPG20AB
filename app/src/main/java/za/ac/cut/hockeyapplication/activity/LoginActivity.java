@@ -18,6 +18,7 @@ import com.backendless.async.callback.AsyncCallback;
 import com.backendless.exceptions.BackendlessFault;
 
 import za.ac.cut.hockeyapplication.R;
+import za.ac.cut.hockeyapplication.helper.UserHelper;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -53,8 +54,8 @@ public class LoginActivity extends AppCompatActivity {
                     Backendless.UserService.login(username, password, new AsyncCallback<BackendlessUser>() {
                         @Override
                         public void handleResponse(BackendlessUser response) {
-                            String role = response.getProperty("role").toString();
-                            if (role.equalsIgnoreCase("NONE")) {
+                            String role = response.getProperty(UserHelper.PROPERTY_ROLE).toString();
+                            if (role.equalsIgnoreCase(UserHelper.ROLE_NONE)) {
                                 Toast.makeText(LoginActivity.this, "Ask your Admin to assign you a role for you to use this app", Toast.LENGTH_LONG)
                                      .show();
                             } else {

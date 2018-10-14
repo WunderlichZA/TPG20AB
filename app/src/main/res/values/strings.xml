@@ -14,4 +14,8 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_teams_opponents">TeamsOpponentsActivity</string>
+    <string name="teams_fragment_title">Teams</string>
+    <string name="opponents_fragment_title">Opponents</string>
+    <string name="title_teams_opponents">Teams and Opponents</string>
 </resources>
