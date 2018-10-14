@@ -1,7 +1,6 @@
 package za.ac.cut.hockeyapplication.activity;
 
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -19,7 +18,7 @@ import com.backendless.persistence.local.UserIdStorageFactory;
 import za.ac.cut.hockeyapplication.R;
 import za.ac.cut.hockeyapplication.helper.UserHelper;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+public class MainActivity extends BaseActivity implements View.OnClickListener {
 
     String userId;
 
@@ -93,6 +92,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.add_team_button:
                 TeamsOpponentsActivity.start(MainActivity.this);
                 break;
+            case R.id.move_players_button:
+                MovePlayersActivity.start(MainActivity.this);
+                break;
             case R.id.set_roles_button:
                 SetRolesActivity.start(MainActivity.this);
                 break;
@@ -103,19 +105,5 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 logout();
                 break;
         }
-    }
-
-    private void logout() {
-        Backendless.UserService.logout(new AsyncCallback<Void>() {
-            @Override
-            public void handleResponse(Void response) {
-                finish();
-            }
-
-            @Override
-            public void handleFault(BackendlessFault fault) {
-                Toast.makeText(MainActivity.this, fault.getMessage(), Toast.LENGTH_LONG).show();
-            }
-        });
     }
 }

@@ -57,21 +57,21 @@
                     android:id="@+id/add_player_button"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:onClick="onButtonClicked"
+                    android:onClick="onClick"
                     android:text="Add Player" />
 
                 <android.support.design.button.MaterialButton
                     android:id="@+id/my_players_button"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:onClick="onButtonClicked"
+                    android:onClick="onClick"
                     android:text="My Players" />
 
                 <android.support.design.button.MaterialButton
                     android:id="@+id/matches_button"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:onClick="onButtonClicked"
+                    android:onClick="onClick"
                     android:text="Matches" />
             </LinearLayout>
 
@@ -79,7 +79,7 @@
                 android:id="@+id/button_logout_coach"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:onClick="onButtonClicked"
+                android:onClick="onClick"
                 android:text="Logout" />
         </LinearLayout>
 

@@ -54,7 +54,7 @@ public class OpponentsFragment extends BaseFragment implements OpponentsAdapter.
 
     @Override
     public String getTitle() {
-        return "Opponents";
+        return TAG;
     }
 
     @Override
@@ -73,7 +73,7 @@ public class OpponentsFragment extends BaseFragment implements OpponentsAdapter.
                     adapter.setData(opponents);
                 } else {
                     // TODO
-                    Log.e("Opponents", "no teams found");
+                    Log.e(TAG, "no opponents found");
                 }
             }
 
@@ -82,7 +82,7 @@ public class OpponentsFragment extends BaseFragment implements OpponentsAdapter.
                 hideLoadingProgress();
                 // TODO
                 if (fault != null) {
-                    Log.e("Opponents", "Error: " + fault.getMessage());
+                    Log.e(TAG, "Error: " + fault.getMessage());
                 }
             }
         });

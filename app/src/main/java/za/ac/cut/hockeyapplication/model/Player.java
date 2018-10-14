@@ -51,6 +51,10 @@ public class Player implements Serializable {
         this.team = team;
     }
 
+    public String getFullName() {
+        return surname + " " + name;
+    }
+
     public HashMap toMap() {
         HashMap player = new HashMap();
         player.put("medicalAidInfo", this.medicalInfo);

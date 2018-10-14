@@ -53,7 +53,7 @@ public class TeamsFragment extends BaseFragment implements TeamsAdapter.TeamClic
 
     @Override
     public String getTitle() {
-        return "Teams";
+        return TAG;
     }
 
     @Override
@@ -72,7 +72,7 @@ public class TeamsFragment extends BaseFragment implements TeamsAdapter.TeamClic
                     adapter.setData(teams);
                 } else {
                     // TODO
-                    Log.e("Teams", "no teams found");
+                    Log.e(TAG, "no teams found");
                 }
             }
 
@@ -81,7 +81,7 @@ public class TeamsFragment extends BaseFragment implements TeamsAdapter.TeamClic
                 hideLoadingProgress();
                 // TODO
                 if (fault != null) {
-                    Log.e("Teams", "Error: " + fault.getMessage());
+                    Log.e(TAG, "Error: " + fault.getMessage());
                 }
             }
         });

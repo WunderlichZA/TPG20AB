@@ -22,14 +22,14 @@ import za.ac.cut.hockeyapplication.model.Users;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class ItemsFragment extends android.support.v4.app.Fragment {
+public class UsersFragment extends android.support.v4.app.Fragment {
 
     ListView listView;
     private ProgressDialog progressDialog;
     private List<Users> usersList;
     private ArrayAdapter<Users> adapter;
 
-    public ItemsFragment() {
+    public UsersFragment() {
         // Required empty public constructor
     }
 

@@ -93,8 +93,7 @@ public class Users implements Serializable {
         return user;
     }
 
-    @Override
-    public String toString() {
-        return name + " " + surname;
+    public String getFullName() {
+        return surname + " " + name;
     }
 }
