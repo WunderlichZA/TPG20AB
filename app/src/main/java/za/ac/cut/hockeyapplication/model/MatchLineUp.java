@@ -9,7 +9,7 @@ public class MatchLineUp {
     private Opponent opponent;
     private Player player;
     private String goals;
-    private String position;
+    private String playerPosition;
     private String teamRating;
     private Match match;
     private List<Player> players;
@@ -46,12 +46,12 @@ public class MatchLineUp {
         this.goals = goals;
     }
 
-    public String getPosition() {
-        return position;
+    public String getPlayerPosition() {
+        return playerPosition;
     }
 
-    public void setPosition(String position) {
-        this.position = position;
+    public void setPlayerPosition(String position) {
+        this.playerPosition = position;
     }
 
     public Match getMatch() {
@@ -82,9 +82,9 @@ public class MatchLineUp {
         HashMap matchLineUp =  new HashMap();
         matchLineUp.put("goals", this.goals);
         matchLineUp.put("match", this.match);
-        matchLineUp.put("playerPosition", this.position);
+        matchLineUp.put("playerPosition", this.playerPosition);
         matchLineUp.put("players", this.players);
-        matchLineUp.put("team_rating", this.teamRating);
+        matchLineUp.put("teamRating", this.teamRating);
         return matchLineUp;
     }
 }

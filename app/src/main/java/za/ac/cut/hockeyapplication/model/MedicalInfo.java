@@ -85,7 +85,7 @@ public class MedicalInfo {
         medicalInfo.put("medicalAidName", this.medicalAidNumber);
         medicalInfo.put("medicalAidPlan", this.medicalAidPlan);
         medicalInfo.put("player", this.player);
-        medicalInfo.put("second_parent_phone_number", this.parentTwpCellNumber);
+        medicalInfo.put("secondParentPhoneNumber", this.parentTwpCellNumber);
         return medicalInfo;
     }
 }

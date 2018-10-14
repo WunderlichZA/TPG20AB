@@ -108,7 +108,7 @@ public class MatchStats {
         matchStats.put("score", this.score);
         matchStats.put("secondHalfGoals", this.secondHalfGoals);
         matchStats.put("secondHalfTurnOver", this.secondHalfTurnOvers);
-        matchStats.put("shots_at_goal", this.shortsAtGoal);
+        matchStats.put("shotsAtGoal", this.shortsAtGoal);
         return matchStats;
     }
 }

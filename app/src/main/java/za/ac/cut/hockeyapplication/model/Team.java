@@ -8,7 +8,7 @@ public class Team {
 
     private String ObjectId;
     private String teamName;
-    private Users user;
+    private Users coach;
     private List<Match> matches;
     private List<Player> players;
     private String ageGroup;
@@ -21,12 +21,12 @@ public class Team {
         ObjectId = objectId;
     }
 
-    public Users getUser() {
-        return user;
+    public Users getCoach() {
+        return coach;
     }
 
-    public void setUser(Users user) {
-        this.user = user;
+    public void setCoach(Users coach) {
+        this.coach = coach;
     }
 
     public List<Match> getMatches() {
@@ -63,7 +63,7 @@ public class Team {
 
     public HashMap toMap(){
         HashMap team =  new HashMap();
-        team.put("coach", this.user);
+        team.put("coach", this.coach);
         team.put("matches", this.matches);
         team.put("name", this.teamName);
         team.put("players", this.players);
