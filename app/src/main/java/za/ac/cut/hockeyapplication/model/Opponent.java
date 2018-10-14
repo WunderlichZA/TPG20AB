@@ -1,6 +1,5 @@
 package za.ac.cut.hockeyapplication.model;
 
-
 import java.util.HashMap;
 
 public class Opponent {

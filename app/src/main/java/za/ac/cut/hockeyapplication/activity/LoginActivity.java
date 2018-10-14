@@ -18,6 +18,7 @@ import com.backendless.async.callback.AsyncCallback;
 import com.backendless.exceptions.BackendlessFault;
 
 import za.ac.cut.hockeyapplication.R;
+import za.ac.cut.hockeyapplication.helper.UserHelper;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -53,11 +54,10 @@ public class LoginActivity extends AppCompatActivity {
                     Backendless.UserService.login(username, password, new AsyncCallback<BackendlessUser>() {
                         @Override
                         public void handleResponse(BackendlessUser response) {
-                            String role = response.getProperty("role").toString();
-                            if (role.equalsIgnoreCase("NONE")) {
+                            String role = response.getProperty(UserHelper.PROPERTY_ROLE).toString();
+                            if (role.equalsIgnoreCase(UserHelper.ROLE_NONE)) {
                                 Toast.makeText(LoginActivity.this, "Ask your Admin to assign you a role for you to use this app", Toast.LENGTH_LONG)
-                                        .show();
-
+                                     .show();
                             } else {
                                 startActivity(new Intent(LoginActivity.this, MainActivity.class));
                                 finish();
@@ -67,12 +67,12 @@ public class LoginActivity extends AppCompatActivity {
                         @Override
                         public void handleFault(BackendlessFault fault) {
                             Toast.makeText(LoginActivity.this, fault.getMessage(), Toast.LENGTH_LONG)
-                                    .show();
+                                 .show();
                         }
                     }, true);
                 } else {
                     Toast.makeText(LoginActivity.this, "Field cannot be empty", Toast.LENGTH_LONG)
-                            .show();
+                         .show();
                 }
             }
         });
@@ -89,35 +89,43 @@ public class LoginActivity extends AppCompatActivity {
         try {
             final EditText etPasswordReset = new EditText(this);
             AlertDialog dialog = new AlertDialog.Builder(this).setTitle("Reset Password")
-                    .setMessage("Please enter your email address to send reset instructions to:")
-                    .setView(etPasswordReset)
-                    .setPositiveButton("Send", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(
-                                DialogInterface dialogInterface,
-                                int i
-                        ) {
-                            Backendless.UserService.restorePassword(etPasswordReset.getText().toString().trim(), new AsyncCallback<Void>() {
-                                @Override
-                                public void handleResponse(
-                                        Void response
-                                ) {
-                                    if (response != null) {
-                                        Toast.makeText(LoginActivity.this, "Password reset instructions has been sent to " + etPasswordReset.getText().toString(), Toast.LENGTH_LONG).show();
-                                    }
-                                }
+                                                              .setMessage("Please enter your email address to send reset instructions to:")
+                                                              .setView(etPasswordReset)
+                                                              .setPositiveButton("Send", new DialogInterface.OnClickListener() {
+                                                                  @Override
+                                                                  public void onClick(
+                                                                          DialogInterface dialogInterface,
+                                                                          int i
+                                                                  ) {
+                                                                      Backendless.UserService.restorePassword(etPasswordReset
+                                                                              .getText()
+                                                                              .toString()
+                                                                              .trim(), new AsyncCallback<Void>() {
+                                                                          @Override
+                                                                          public void handleResponse(
+                                                                                  Void response
+                                                                          ) {
+                                                                              if (response != null) {
+                                                                                  Toast.makeText(LoginActivity.this, "Password reset instructions has been sent to " + etPasswordReset
+                                                                                          .getText()
+                                                                                          .toString(), Toast.LENGTH_LONG)
+                                                                                       .show();
+                                                                              }
+                                                                          }
 
-                                @Override
-                                public void handleFault(
-                                        BackendlessFault fault
-                                ) {
-                                    Toast.makeText(LoginActivity.this, fault.getMessage(), Toast.LENGTH_LONG).show();
-                                }
-                            });
-                        }
-                    })
-                    .setNegativeButton("Cancel", null)
-                    .create();
+                                                                          @Override
+                                                                          public void handleFault(
+                                                                                  BackendlessFault fault
+                                                                          ) {
+                                                                              Toast.makeText(LoginActivity.this, fault
+                                                                                      .getMessage(), Toast.LENGTH_LONG)
+                                                                                   .show();
+                                                                          }
+                                                                      });
+                                                                  }
+                                                              })
+                                                              .setNegativeButton("Cancel", null)
+                                                              .create();
             dialog.show();
         } catch (Exception e) {
             Log.e("Login Activity", "resetUserPassword: " + e.getMessage());

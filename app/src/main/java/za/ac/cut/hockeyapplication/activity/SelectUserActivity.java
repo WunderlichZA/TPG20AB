@@ -1,5 +1,6 @@
 package za.ac.cut.hockeyapplication.activity;
 
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -20,7 +21,7 @@ import java.util.List;
 import za.ac.cut.hockeyapplication.R;
 import za.ac.cut.hockeyapplication.model.Users;
 
-public class UserItemsActivity extends AppCompatActivity {
+public class SelectUserActivity extends AppCompatActivity {
 
     private List<Users> usersList;
     private Users user;
@@ -43,7 +44,7 @@ public class UserItemsActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 try {
                     user = (Users) listView.getItemAtPosition(i);
-                    Intent intent = new Intent(UserItemsActivity.this, SetRolesActivity.class);
+                    Intent intent = new Intent(SelectUserActivity.this, SetRolesActivity.class);
                     Bundle bundle = new Bundle();
                     bundle.putSerializable("USER_OBJECT", user);
                     intent.putExtras(bundle);
@@ -77,7 +78,7 @@ public class UserItemsActivity extends AppCompatActivity {
                     if (response != null) {
                         usersList = response;
                         progressDialog.dismiss();
-                        usersArrayAdapter = new ArrayAdapter<>(UserItemsActivity.this, R.layout.support_simple_spinner_dropdown_item, usersList);
+                        usersArrayAdapter = new ArrayAdapter<>(SelectUserActivity.this, R.layout.support_simple_spinner_dropdown_item, usersList);
                         //listView.setAdapter(usersArrayAdapter);
                         listView.setAdapter(usersArrayAdapter);
                         Log.e("UsersActivity", "handleResponse: " + usersList.get(1)
@@ -97,5 +98,9 @@ public class UserItemsActivity extends AppCompatActivity {
         } catch (Exception e) {
             Log.e("Exception", "getUsers: " + e.getMessage());
         }
+    }
+
+    public static void start(Activity activity) {
+        activity.startActivity(new Intent(activity, SelectUserActivity.class));
     }
 }

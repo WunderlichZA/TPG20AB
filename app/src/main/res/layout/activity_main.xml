@@ -58,24 +58,28 @@
                     android:id="@+id/add_team_button"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:onClick="onClick"
                     android:text="Add Team / Opponent" />
 
                 <android.support.design.button.MaterialButton
                     android:id="@+id/move_players_button"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:onClick="onClick"
                     android:text="Move Players" />
 
                 <android.support.design.button.MaterialButton
                     android:id="@+id/set_roles_button"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:onClick="onClick"
                     android:text="Set Roles" />
 
                 <android.support.design.button.MaterialButton
                     android:id="@+id/coach_menu_button"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:onClick="onClick"
                     android:text="Coach Menu" />
             </LinearLayout>
 
@@ -90,18 +94,21 @@
                     android:id="@+id/add_player_button"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:onClick="onClick"
                     android:text="Add Player" />
 
                 <android.support.design.button.MaterialButton
                     android:id="@+id/my_players_button"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:onClick="onClick"
                     android:text="My Players" />
 
                 <android.support.design.button.MaterialButton
                     android:id="@+id/matches_button"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:onClick="onClick"
                     android:text="Matches" />
             </LinearLayout>
 
@@ -109,6 +116,7 @@
                 android:id="@+id/logout_button"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:onClick="onClick"
                 android:text="Logout" />
         </LinearLayout>
 
