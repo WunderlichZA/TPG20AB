@@ -1,12 +1,10 @@
-package businesslayer.model;
+package za.ac.cut.hockeyapplication.model;
 
-import io.realm.RealmObject;
-import io.realm.annotations.PrimaryKey;
+import java.util.HashMap;
 
-public class MedicalInfo extends RealmObject {
+public class MedicalInfo {
 
-    @PrimaryKey
-    private int medicalRecordId;
+    private String objectId;
     private String medicalAidName;
     private String medicalAidPlan;
     private String medicalAidNumber;
@@ -15,12 +13,12 @@ public class MedicalInfo extends RealmObject {
     private String parentTwpCellNumber;
     private Player player;
 
-    public int getMedicalRecordId() {
-        return medicalRecordId;
+    public String getObjectId() {
+        return objectId;
     }
 
-    public void setMedicalRecordId(int medicalRecordId) {
-        this.medicalRecordId = medicalRecordId;
+    public void setObjectId(String objectId) {
+        this.objectId = objectId;
     }
 
     public String getMedicalAidName() {
@@ -77,5 +75,17 @@ public class MedicalInfo extends RealmObject {
 
     public void setPlayer(Player player) {
         this.player = player;
+    }
+
+    public HashMap toMap(){
+        HashMap medicalInfo =  new HashMap();
+        medicalInfo.put("allergies", this.allergies);
+        medicalInfo.put("firstParentPhoneNumber", this.parentOneCellNumber);
+        medicalInfo.put("medical_aid_number", this.medicalAidNumber);
+        medicalInfo.put("medicalAidName", this.medicalAidNumber);
+        medicalInfo.put("medicalAidPlan", this.medicalAidPlan);
+        medicalInfo.put("player", this.player);
+        medicalInfo.put("secondParentPhoneNumber", this.parentTwpCellNumber);
+        return medicalInfo;
     }
 }

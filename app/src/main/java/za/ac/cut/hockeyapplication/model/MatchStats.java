@@ -1,12 +1,12 @@
-package businesslayer.model;
+package za.ac.cut.hockeyapplication.model;
 
-import io.realm.RealmObject;
-import io.realm.annotations.PrimaryKey;
 
-public class MatchStats extends RealmObject {
+import java.util.HashMap;
+import java.util.List;
 
-    @PrimaryKey
-    private int matchStatsId;
+public class MatchStats {
+
+    private String objectId;
     private String firstHalfTurnOvers;
     private String secondHalfTurnOvers;
     private String firstHalfGoals;
@@ -15,14 +15,14 @@ public class MatchStats extends RealmObject {
     private String circlePenetration;
     private String penaltyCorners;
     private String shortsAtGoal;
-    private Opponent opponent;
+    private List<Match> matches;
 
-    public int getMatchStatsId() {
-        return matchStatsId;
+    public String getObjectId() {
+        return objectId;
     }
 
-    public void setMatchStatsId(int matchStatsId) {
-        this.matchStatsId = matchStatsId;
+    public void setObjectId(String objectId) {
+        this.objectId = objectId;
     }
 
     public String getFirstHalfTurnOvers() {
@@ -89,11 +89,24 @@ public class MatchStats extends RealmObject {
         this.shortsAtGoal = shortsAtGoal;
     }
 
-    public Opponent getOpponent() {
-        return opponent;
+    public List<Match> getMatches() {
+        return matches;
     }
 
-    public void setOpponent(Opponent opponent) {
-        this.opponent = opponent;
+    public void setMatches(List<Match> matches) {
+        this.matches = matches;
+    }
+
+    public HashMap toMap(){
+        HashMap matchStats =  new HashMap();
+        matchStats.put("circlePenetrations", this.circlePenetration);
+        matchStats.put("firstHalfGoals", this.firstHalfGoals);
+        matchStats.put("matches", this.matches);
+        matchStats.put("penaltyCorners", this.penaltyCorners);
+        matchStats.put("score", this.score);
+        matchStats.put("secondHalfGoals", this.secondHalfGoals);
+        matchStats.put("secondHalfTurnOver", this.secondHalfTurnOvers);
+        matchStats.put("shotsAtGoal", this.shortsAtGoal);
+        return matchStats;
     }
 }

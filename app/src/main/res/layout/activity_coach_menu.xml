@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout android:layout_height="match_parent"
-                android:layout_width="match_parent"
-                xmlns:android="http://schemas.android.com/apk/res/android">
+    android:layout_width="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
     <include
         android:id="@+id/hockeyToolbar"
         layout="@layout/toolbar" />
 
     <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-                xmlns:app="http://schemas.android.com/apk/res-auto"
-                xmlns:tools="http://schemas.android.com/tools"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_below="@+id/hockeyToolbar"
-                tools:context=".activity.MainActivity">
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/hockeyToolbar"
+        tools:context=".activity.MainActivity">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -48,75 +48,38 @@
                 android:textStyle="bold" />
 
             <LinearLayout
-                android:id="@+id/admin_menu"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
-                android:orientation="vertical">
-
-                <android.support.design.button.MaterialButton
-                    android:id="@+id/add_team_button"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:onClick="onClick"
-                    android:text="Add Team / Opponent" />
-
-                <android.support.design.button.MaterialButton
-                    android:id="@+id/move_players_button"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:onClick="onClick"
-                    android:text="Move Players" />
-
-                <android.support.design.button.MaterialButton
-                    android:id="@+id/set_roles_button"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:onClick="onClick"
-                    android:text="Set Roles" />
-
-                <android.support.design.button.MaterialButton
-                    android:id="@+id/coach_menu_button"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:onClick="onClick"
-                    android:text="Coach Menu" />
-            </LinearLayout>
-
-            <LinearLayout
                 android:id="@+id/coach_menu"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:visibility="gone">
+                android:orientation="vertical">
 
                 <android.support.design.button.MaterialButton
                     android:id="@+id/add_player_button"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:onClick="onClick"
+                    android:onClick="onButtonClicked"
                     android:text="Add Player" />
 
                 <android.support.design.button.MaterialButton
                     android:id="@+id/my_players_button"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:onClick="onClick"
+                    android:onClick="onButtonClicked"
                     android:text="My Players" />
 
                 <android.support.design.button.MaterialButton
                     android:id="@+id/matches_button"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:onClick="onClick"
+                    android:onClick="onButtonClicked"
                     android:text="Matches" />
             </LinearLayout>
 
             <android.support.design.button.MaterialButton
-                android:id="@+id/logout_button"
+                android:id="@+id/button_logout_coach"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:onClick="onClick"
+                android:onClick="onButtonClicked"
                 android:text="Logout" />
         </LinearLayout>
 

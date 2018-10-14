@@ -1,23 +1,21 @@
-package businesslayer.model;
+package za.ac.cut.hockeyapplication.model;
 
-import io.realm.RealmObject;
-import io.realm.annotations.PrimaryKey;
+import java.util.HashMap;
 
-public class Player extends RealmObject {
+public class Player {
 
-    @PrimaryKey
-    private int playerId;
+    private String objectId;
     private String surname;
     private String name;
     private MedicalInfo medicalInfo;
     private Team team;
 
-    public int getPlayerId() {
-        return playerId;
+    public String getObjectId() {
+        return objectId;
     }
 
-    public void setPlayerId(int playerId) {
-        this.playerId = playerId;
+    public void setObjectId(String objectId) {
+        this.objectId = objectId;
     }
 
     public String getSurname() {
@@ -50,5 +48,13 @@ public class Player extends RealmObject {
 
     public void setTeam(Team team) {
         this.team = team;
+    }
+
+    public HashMap toMap(){
+        HashMap player =  new HashMap();
+        player.put("medicalAidInfo", this.medicalInfo);
+        player.put("surname", this.surname);
+        player.put("team", this.team);
+        return player;
     }
 }
