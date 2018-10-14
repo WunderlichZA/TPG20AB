@@ -3,10 +3,9 @@ package za.ac.cut.hockeyapplication.model;
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
 
-public class MatchStats extends RealmObject {
+public class MatchStats {
 
-    @PrimaryKey
-    private int matchStatsId;
+    private String objectId;
     private String firstHalfTurnOvers;
     private String secondHalfTurnOvers;
     private String firstHalfGoals;
@@ -17,12 +16,12 @@ public class MatchStats extends RealmObject {
     private String shortsAtGoal;
     private Opponent opponent;
 
-    public int getMatchStatsId() {
-        return matchStatsId;
+    public String getObjectId() {
+        return objectId;
     }
 
-    public void setMatchStatsId(int matchStatsId) {
-        this.matchStatsId = matchStatsId;
+    public void setObjectId(String objectId) {
+        this.objectId = objectId;
     }
 
     public String getFirstHalfTurnOvers() {

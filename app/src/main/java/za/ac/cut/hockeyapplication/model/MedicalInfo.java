@@ -1,12 +1,8 @@
 package za.ac.cut.hockeyapplication.model;
 
-import io.realm.RealmObject;
-import io.realm.annotations.PrimaryKey;
+public class MedicalInfo {
 
-public class MedicalInfo extends RealmObject {
-
-    @PrimaryKey
-    private int medicalRecordId;
+    private String objectId;
     private String medicalAidName;
     private String medicalAidPlan;
     private String medicalAidNumber;
@@ -15,12 +11,12 @@ public class MedicalInfo extends RealmObject {
     private String parentTwpCellNumber;
     private Player player;
 
-    public int getMedicalRecordId() {
-        return medicalRecordId;
+    public String getObjectId() {
+        return objectId;
     }
 
-    public void setMedicalRecordId(int medicalRecordId) {
-        this.medicalRecordId = medicalRecordId;
+    public void setObjectId(String objectId) {
+        this.objectId = objectId;
     }
 
     public String getMedicalAidName() {

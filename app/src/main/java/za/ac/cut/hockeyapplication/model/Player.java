@@ -3,21 +3,20 @@ package za.ac.cut.hockeyapplication.model;
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
 
-public class Player extends RealmObject {
+public class Player {
 
-    @PrimaryKey
-    private int playerId;
+    private String objectId;
     private String surname;
     private String name;
     private MedicalInfo medicalInfo;
     private Team team;
 
-    public int getPlayerId() {
-        return playerId;
+    public String getObjectId() {
+        return objectId;
     }
 
-    public void setPlayerId(int playerId) {
-        this.playerId = playerId;
+    public void setObjectId(String objectId) {
+        this.objectId = objectId;
     }
 
     public String getSurname() {
