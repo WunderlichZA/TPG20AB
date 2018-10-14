@@ -1,5 +1,7 @@
 package za.ac.cut.hockeyapplication.model;
 
+import java.util.HashMap;
+
 public class MedicalInfo {
 
     private String objectId;
@@ -73,5 +75,17 @@ public class MedicalInfo {
 
     public void setPlayer(Player player) {
         this.player = player;
+    }
+
+    public HashMap toMap(){
+        HashMap medicalInfo =  new HashMap();
+        medicalInfo.put("allergies", this.allergies);
+        medicalInfo.put("firstParentPhoneNumber", this.parentOneCellNumber);
+        medicalInfo.put("medical_aid_number", this.medicalAidNumber);
+        medicalInfo.put("medicalAidName", this.medicalAidNumber);
+        medicalInfo.put("medicalAidPlan", this.medicalAidPlan);
+        medicalInfo.put("player", this.player);
+        medicalInfo.put("secondParentPhoneNumber", this.parentTwpCellNumber);
+        return medicalInfo;
     }
 }
