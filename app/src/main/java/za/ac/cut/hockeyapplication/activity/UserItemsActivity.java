@@ -47,7 +47,7 @@ public class UserItemsActivity extends AppCompatActivity {
                     Bundle bundle = new Bundle();
                     bundle.putSerializable("USER_OBJECT", user);
                     intent.putExtras(bundle);
-                    startActivity(intent);
+                    setResult(RESULT_OK, intent);
                     finish();
                 } catch (Exception e) {
                     Log.e("Users", "onItemClick: " + e.getMessage());

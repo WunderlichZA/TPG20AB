@@ -2,12 +2,9 @@ package za.ac.cut.hockeyapplication.model;
 
 import java.io.Serializable;
 
-import io.realm.RealmObject;
-import io.realm.annotations.PrimaryKey;
+public class Users implements Serializable {
 
-public class Users extends RealmObject implements Serializable {
-
-    @PrimaryKey
+    public String objectId;
     private String email;
     private String surname;
     private String name;
@@ -15,6 +12,14 @@ public class Users extends RealmObject implements Serializable {
     private String role;
 
     public Users() {
+    }
+
+    public String getObjectId() {
+        return objectId;
+    }
+
+    public void setObjectId(String objectId) {
+        this.objectId = objectId;
     }
 
     public String getSurname() {
