@@ -1,27 +1,18 @@
 package za.ac.cut.hockeyapplication.model;
 
+import java.util.HashMap;
+import java.util.List;
+
 public class MatchLineUp {
 
     private String objectId;
     private Opponent opponent;
     private Player player;
     private String goals;
-    private String leftForward;
-    private String rightForward;
-    private String centerForward;
-    private String leftLink;
-    private String righLink;
-    private String centerLink;
-    private String leftBack;
-    private String rightBack;
-    private String back;
-    private String sweeper;
-    private String goalie;
-    private String bench;
-    private String bench2;
-    private String bench3;
-    private String bench4;
-    private String bench5;
+    private String position;
+    private String teamRating;
+    private Match match;
+    private List<Player> players;
 
     public String getObjectId() {
         return objectId;
@@ -55,131 +46,45 @@ public class MatchLineUp {
         this.goals = goals;
     }
 
-    public String getLeftForward() {
-        return leftForward;
+    public String getPosition() {
+        return position;
     }
 
-    public void setLeftForward(String leftForward) {
-        this.leftForward = leftForward;
+    public void setPosition(String position) {
+        this.position = position;
     }
 
-    public String getRightForward() {
-        return rightForward;
+    public Match getMatch() {
+        return match;
     }
 
-    public void setRightForward(String rightForward) {
-        this.rightForward = rightForward;
+    public void setMatch(Match match) {
+        this.match = match;
     }
 
-    public String getCenterForward() {
-        return centerForward;
+    public List<Player> getPlayers() {
+        return players;
     }
 
-    public void setCenterForward(String centerForward) {
-        this.centerForward = centerForward;
+    public void setPlayers(List<Player> players) {
+        this.players = players;
     }
 
-    public String getLeftLink() {
-        return leftLink;
+    public String getTeamRating() {
+        return teamRating;
     }
 
-    public void setLeftLink(String leftLink) {
-        this.leftLink = leftLink;
+    public void setTeamRating(String teamRating) {
+        this.teamRating = teamRating;
     }
 
-    public String getRighLink() {
-        return righLink;
-    }
-
-    public void setRighLink(String righLink) {
-        this.righLink = righLink;
-    }
-
-    public String getCenterLink() {
-        return centerLink;
-    }
-
-    public void setCenterLink(String centerLink) {
-        this.centerLink = centerLink;
-    }
-
-    public String getLeftBack() {
-        return leftBack;
-    }
-
-    public void setLeftBack(String leftBack) {
-        this.leftBack = leftBack;
-    }
-
-    public String getRightBack() {
-        return rightBack;
-    }
-
-    public void setRightBack(String rightBack) {
-        this.rightBack = rightBack;
-    }
-
-    public String getBack() {
-        return back;
-    }
-
-    public void setBack(String back) {
-        this.back = back;
-    }
-
-    public String getSweeper() {
-        return sweeper;
-    }
-
-    public void setSweeper(String sweeper) {
-        this.sweeper = sweeper;
-    }
-
-    public String getGoalie() {
-        return goalie;
-    }
-
-    public void setGoalie(String goalie) {
-        this.goalie = goalie;
-    }
-
-    public String getBench() {
-        return bench;
-    }
-
-    public void setBench(String bench) {
-        this.bench = bench;
-    }
-
-    public String getBench2() {
-        return bench2;
-    }
-
-    public void setBench2(String bench2) {
-        this.bench2 = bench2;
-    }
-
-    public String getBench3() {
-        return bench3;
-    }
-
-    public void setBench3(String bench3) {
-        this.bench3 = bench3;
-    }
-
-    public String getBench4() {
-        return bench4;
-    }
-
-    public void setBench4(String bench4) {
-        this.bench4 = bench4;
-    }
-
-    public String getBench5() {
-        return bench5;
-    }
-
-    public void setBench5(String bench5) {
-        this.bench5 = bench5;
+    public HashMap toMap(){
+        HashMap matchLineUp =  new HashMap();
+        matchLineUp.put("goals", this.goals);
+        matchLineUp.put("match", this.match);
+        matchLineUp.put("playerPosition", this.position);
+        matchLineUp.put("players", this.players);
+        matchLineUp.put("team_rating", this.teamRating);
+        return matchLineUp;
     }
 }

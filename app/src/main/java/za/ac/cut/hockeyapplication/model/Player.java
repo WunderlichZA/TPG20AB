@@ -1,7 +1,6 @@
 package za.ac.cut.hockeyapplication.model;
 
-import io.realm.RealmObject;
-import io.realm.annotations.PrimaryKey;
+import java.util.HashMap;
 
 public class Player {
 
@@ -49,5 +48,13 @@ public class Player {
 
     public void setTeam(Team team) {
         this.team = team;
+    }
+
+    public HashMap toMap(){
+        HashMap player =  new HashMap();
+        player.put("medicalAidInfo", this.medicalInfo);
+        player.put("surname", this.surname);
+        player.put("team", this.team);
+        return player;
     }
 }
