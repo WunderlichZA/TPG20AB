@@ -1,10 +1,10 @@
 package za.ac.cut.hockeyapplication.activity;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.button.MaterialButton;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -20,7 +20,7 @@ import com.backendless.exceptions.BackendlessFault;
 import za.ac.cut.hockeyapplication.R;
 import za.ac.cut.hockeyapplication.model.Users;
 
-public class SetRolesActivity extends AppCompatActivity {
+public class SetRolesActivity extends BaseActivity {
 
     private Users loggedInUser;
     String userRole;
@@ -43,7 +43,7 @@ public class SetRolesActivity extends AppCompatActivity {
     public void showUsers(View view) {
         switch (view.getId()) {
             case R.id.button_select_user:
-                startActivityForResult(new Intent(SetRolesActivity.this, SelectUserActivity.class), 1);
+                SelectUserActivity.start(SetRolesActivity.this);
                 break;
             case R.id.save_changes_button:
                 saveChanges(loggedInUser);
@@ -94,6 +94,7 @@ public class SetRolesActivity extends AppCompatActivity {
     public void saveChanges(final Users user) {
 
         if (user != null && userRole != null) {
+            showLoadingProgress();
             Backendless.UserService.findById(user.getObjectId(), new AsyncCallback<BackendlessUser>() {
                 @Override
                 public void handleResponse(BackendlessUser userObj) {
@@ -101,6 +102,7 @@ public class SetRolesActivity extends AppCompatActivity {
                     Backendless.UserService.update(userObj, new AsyncCallback<BackendlessUser>() {
                         @Override
                         public void handleResponse(BackendlessUser updateUser) {
+                            hideLoadingProgress();
                             Log.i("update user", "handleResponse: " + updateUser.getProperty("role")
                                                                                 .toString());
                             Toast.makeText(SetRolesActivity.this, "Role successfully assigned.", Toast.LENGTH_LONG)
@@ -109,6 +111,7 @@ public class SetRolesActivity extends AppCompatActivity {
 
                         @Override
                         public void handleFault(BackendlessFault fault) {
+                            hideLoadingProgress();
                             Toast.makeText(SetRolesActivity.this, fault.getMessage(), Toast.LENGTH_LONG)
                                  .show();
                         }
@@ -117,6 +120,7 @@ public class SetRolesActivity extends AppCompatActivity {
 
                 @Override
                 public void handleFault(BackendlessFault fault) {
+                    hideLoadingProgress();
                     Log.e("user update", "handleFault: " + fault.getMessage());
                 }
             });
@@ -127,5 +131,9 @@ public class SetRolesActivity extends AppCompatActivity {
             Toast.makeText(SetRolesActivity.this, "User must be selected.", Toast.LENGTH_LONG)
                  .show();
         }
+    }
+
+    public static void start(Activity activity) {
+        activity.startActivity(new Intent(activity, SetRolesActivity.class));
     }
 }

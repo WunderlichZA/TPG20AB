@@ -1,7 +1,7 @@
 package za.ac.cut.hockeyapplication.activity;
 
-import android.support.design.button.MaterialButton;
-import android.support.v7.app.AppCompatActivity;
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
@@ -12,7 +12,7 @@ import com.backendless.exceptions.BackendlessFault;
 
 import za.ac.cut.hockeyapplication.R;
 
-public class CoachMenuActivity extends AppCompatActivity {
+public class CoachMenuActivity extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,5 +39,9 @@ public class CoachMenuActivity extends AppCompatActivity {
                 Toast.makeText(CoachMenuActivity.this, fault.getMessage(), Toast.LENGTH_LONG).show();
             }
         });
+    }
+
+    public static void start(Activity activity) {
+        activity.startActivity(new Intent(activity, CoachMenuActivity.class));
     }
 }

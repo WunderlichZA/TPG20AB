@@ -1,6 +1,5 @@
 package za.ac.cut.hockeyapplication.activity;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -95,7 +94,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 TeamsOpponentsActivity.start(MainActivity.this);
                 break;
             case R.id.set_roles_button:
-                startActivity(new Intent(MainActivity.this, SetRolesActivity.class));
+                SetRolesActivity.start(MainActivity.this);
+                break;
+            case R.id.coach_menu_button:
+                CoachMenuActivity.start(MainActivity.this);
                 break;
             case R.id.logout_button:
                 logout();
