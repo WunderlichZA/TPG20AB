@@ -97,7 +97,7 @@ public class SetRolesActivity extends AppCompatActivity {
     public void saveChanges(final Users user) {
 
         if (user != null && userRole != null) {
-            Backendless.UserService.findById(user.getName(), new AsyncCallback<BackendlessUser>() {
+            Backendless.UserService.findById(user.getEmail(), new AsyncCallback<BackendlessUser>() {
                 @Override
                 public void handleResponse(BackendlessUser userObj) {
                     userObj.setProperty("role", userRole);
