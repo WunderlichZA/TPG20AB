@@ -22,6 +22,8 @@ import za.ac.cut.hockeyapplication.R;
 
 public class MainActivity extends AppCompatActivity {
 
+    String userId;
+
     private TextView loggedUser, userRole;
     private LinearLayout adminMenu, coachMenu;
 
@@ -38,36 +40,12 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         coachMenu = findViewById(R.id.coach_menu);
+        adminMenu = findViewById(R.id.admin_menu);
         loggedUser = findViewById(R.id.logged_in_user);
         userRole = findViewById(R.id.role);
 
         buttonLogout = findViewById(R.id.logout_button);
         buttonSetRoles = findViewById(R.id.set_roles_button);
-
-        String userId = UserIdStorageFactory.instance().getStorage().get();
-        Backendless.Data.of(BackendlessUser.class)
-                        .findById(userId, new AsyncCallback<BackendlessUser>() {
-                            @Override
-                            public void handleResponse(BackendlessUser response) {
-                                String role = response.getProperty("role").toString();
-                                if (role.equalsIgnoreCase("ADMIN")) {
-                                    coachMenu.setVisibility(View.GONE);
-                                    loggedUser.setText(response.getEmail().toString());
-                                    userRole.setText(role);
-                                } else {
-                                    loggedUser.setText(response.getEmail().toString());
-                                    userRole.setText("COACH");
-                                    coachMenu.setVisibility(View.VISIBLE);
-                                    adminMenu.setVisibility(View.GONE);
-                                }
-                            }
-
-                            @Override
-                            public void handleFault(BackendlessFault fault) {
-                                Toast.makeText(MainActivity.this, fault.getMessage(), Toast.LENGTH_LONG)
-                                     .show();
-                            }
-                        });
 
         buttonLogout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -93,6 +71,39 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(new Intent(MainActivity.this, SetRolesActivity.class));
             }
         });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        try{
+            userId = UserIdStorageFactory.instance().getStorage().get();
+            Backendless.Data.of(BackendlessUser.class)
+                    .findById(userId, new AsyncCallback<BackendlessUser>() {
+                        @Override
+                        public void handleResponse(BackendlessUser response) {
+                            String role = response.getProperty("role").toString();
+                            if (role.equalsIgnoreCase("ADMIN")) {
+                                coachMenu.setVisibility(View.GONE);
+                                loggedUser.setText(response.getEmail().toString());
+                                userRole.setText(role);
+                            } else {
+                                loggedUser.setText(response.getEmail().toString());
+                                userRole.setText("COACH");
+                                coachMenu.setVisibility(View.VISIBLE);
+                                adminMenu.setVisibility(View.GONE);
+                            }
+                        }
+
+                        @Override
+                        public void handleFault(BackendlessFault fault) {
+                            Toast.makeText(MainActivity.this, fault.getMessage(), Toast.LENGTH_LONG)
+                                    .show();
+                        }
+                    });
+        }catch(Exception e){
+            Toast.makeText(MainActivity.this, e.getMessage(), Toast.LENGTH_LONG).show();
+        }
     }
 
     @Override

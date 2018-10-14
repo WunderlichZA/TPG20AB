@@ -2,6 +2,7 @@ package za.ac.cut.hockeyapplication.model;
 
 public class MatchLineUp {
 
+    private String objectId;
     private Opponent opponent;
     private Player player;
     private String goals;
@@ -21,6 +22,14 @@ public class MatchLineUp {
     private String bench3;
     private String bench4;
     private String bench5;
+
+    public String getObjectId() {
+        return objectId;
+    }
+
+    public void setObjectId(String objectId) {
+        this.objectId = objectId;
+    }
 
     public Opponent getOpponent() {
         return opponent;

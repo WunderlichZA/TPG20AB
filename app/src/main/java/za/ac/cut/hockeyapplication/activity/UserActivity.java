@@ -78,9 +78,7 @@ public class UserActivity extends AppCompatActivity {
                         usersArrayAdapter = new ArrayAdapter<>(UserActivity.this, R.layout.support_simple_spinner_dropdown_item, usersList);
                         //listView.setAdapter(usersArrayAdapter);
                         listView.setAdapter(usersArrayAdapter);
-                        Log.e("UsersActivity", "handleResponse: " + usersList.get(1)
-                                                                             .getName()
-                                                                             .toString());
+                        Log.e("UsersActivity", "handleResponse: " + usersList.get(1).getName());
                     }
                 }
 
