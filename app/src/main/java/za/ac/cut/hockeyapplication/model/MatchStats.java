@@ -1,5 +1,9 @@
 package za.ac.cut.hockeyapplication.model;
 
+
+import java.util.HashMap;
+import java.util.List;
+
 public class MatchStats {
 
     private String objectId;
@@ -11,7 +15,7 @@ public class MatchStats {
     private String circlePenetration;
     private String penaltyCorners;
     private String shortsAtGoal;
-    private Opponent opponent;
+    private List<Match> matches;
 
     public String getObjectId() {
         return objectId;
@@ -85,11 +89,24 @@ public class MatchStats {
         this.shortsAtGoal = shortsAtGoal;
     }
 
-    public Opponent getOpponent() {
-        return opponent;
+    public List<Match> getMatches() {
+        return matches;
     }
 
-    public void setOpponent(Opponent opponent) {
-        this.opponent = opponent;
+    public void setMatches(List<Match> matches) {
+        this.matches = matches;
+    }
+
+    public HashMap toMap(){
+        HashMap matchStats =  new HashMap();
+        matchStats.put("circlePenetrations", this.circlePenetration);
+        matchStats.put("firstHalfGoals", this.firstHalfGoals);
+        matchStats.put("matches", this.matches);
+        matchStats.put("penaltyCorners", this.penaltyCorners);
+        matchStats.put("score", this.score);
+        matchStats.put("secondHalfGoals", this.secondHalfGoals);
+        matchStats.put("secondHalfTurnOver", this.secondHalfTurnOvers);
+        matchStats.put("shotsAtGoal", this.shortsAtGoal);
+        return matchStats;
     }
 }

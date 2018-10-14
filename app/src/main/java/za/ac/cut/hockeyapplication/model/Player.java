@@ -1,5 +1,7 @@
 package za.ac.cut.hockeyapplication.model;
 
+import java.util.HashMap;
+
 public class Player {
 
     private String objectId;
@@ -46,5 +48,13 @@ public class Player {
 
     public void setTeam(Team team) {
         this.team = team;
+    }
+
+    public HashMap toMap(){
+        HashMap player =  new HashMap();
+        player.put("medicalAidInfo", this.medicalInfo);
+        player.put("surname", this.surname);
+        player.put("team", this.team);
+        return player;
     }
 }

@@ -1,5 +1,7 @@
 package za.ac.cut.hockeyapplication.model;
 
+import java.util.HashMap;
+
 public class Opponent {
 
     private String objectId;
@@ -19,5 +21,11 @@ public class Opponent {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public HashMap toMap(){
+        HashMap opponent =  new HashMap();
+        opponent.put("name", this.name);
+        return opponent;
     }
 }

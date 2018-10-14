@@ -1,15 +1,21 @@
 package za.ac.cut.hockeyapplication.model;
 
+import android.service.autofill.FieldClassification;
+
 import java.io.Serializable;
+import java.util.HashMap;
+import java.util.List;
 
 public class Users implements Serializable {
 
-    public String objectId;
+    private String objectId;
     private String email;
     private String surname;
     private String name;
     private String password;
     private String role;
+    private List<Team> teams;
+    private List<Match> matches;
 
     public Users() {
     }
@@ -60,6 +66,33 @@ public class Users implements Serializable {
 
     public void setRole(String role) {
         this.role = role;
+    }
+
+    public List<Team> getTeams() {
+        return teams;
+    }
+
+    public void setTeams(List<Team> teams) {
+        this.teams = teams;
+    }
+
+    public List<Match> getMatches() {
+        return matches;
+    }
+
+    public void setMatches(List<Match> matches) {
+        this.matches = matches;
+    }
+
+    public HashMap toMap(){
+        HashMap user =  new HashMap();
+        user.put("surname", this.surname);
+        user.put("name", this.name);
+        user.put("password", this.password);
+        user.put("teams", this.teams);
+        user.put("matches", this.matches);
+        user.put("email", this.email);
+        return user;
     }
 
     @Override
