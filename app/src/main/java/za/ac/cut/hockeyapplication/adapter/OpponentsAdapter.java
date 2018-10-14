@@ -32,8 +32,7 @@ public class OpponentsAdapter extends RecyclerView.Adapter<OpponentsAdapter.Oppo
 
     @Override
     public void onBindViewHolder(
-            @NonNull OpponentsAdapter.OpponentsViewHolder viewHolder,
-            int position
+            @NonNull OpponentsAdapter.OpponentsViewHolder viewHolder, int position
     ) {
         viewHolder.bind(opponents.get(position));
     }

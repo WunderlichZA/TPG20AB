@@ -1,8 +1,9 @@
 package za.ac.cut.hockeyapplication.model;
 
+import java.io.Serializable;
 import java.util.HashMap;
 
-public class Player {
+public class Player implements Serializable {
 
     private String objectId;
     private String surname;
@@ -50,8 +51,8 @@ public class Player {
         this.team = team;
     }
 
-    public HashMap toMap(){
-        HashMap player =  new HashMap();
+    public HashMap toMap() {
+        HashMap player = new HashMap();
         player.put("medicalAidInfo", this.medicalInfo);
         player.put("surname", this.surname);
         player.put("team", this.team);

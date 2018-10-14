@@ -23,6 +23,9 @@ import za.ac.cut.hockeyapplication.model.Users;
 
 public class SelectUserActivity extends AppCompatActivity {
 
+    public static final int RC_SELECT_USER = 100;
+    public static final String EXTRA_USER = "EXTRA_USER";
+
     private List<Users> usersList;
     private Users user;
 
@@ -45,9 +48,7 @@ public class SelectUserActivity extends AppCompatActivity {
                 try {
                     user = (Users) listView.getItemAtPosition(i);
                     Intent intent = new Intent(SelectUserActivity.this, SetRolesActivity.class);
-                    Bundle bundle = new Bundle();
-                    bundle.putSerializable("USER_OBJECT", user);
-                    intent.putExtras(bundle);
+                    intent.putExtra(EXTRA_USER, user);
                     setResult(RESULT_OK, intent);
                     finish();
                 } catch (Exception e) {
@@ -101,6 +102,6 @@ public class SelectUserActivity extends AppCompatActivity {
     }
 
     public static void start(Activity activity) {
-        activity.startActivity(new Intent(activity, SelectUserActivity.class));
+        activity.startActivityForResult(new Intent(activity, SelectUserActivity.class), RC_SELECT_USER);
     }
 }

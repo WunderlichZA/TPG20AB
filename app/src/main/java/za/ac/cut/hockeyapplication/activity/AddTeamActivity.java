@@ -7,16 +7,23 @@ import android.support.design.button.MaterialButton;
 import android.support.design.widget.TextInputEditText;
 import android.support.design.widget.TextInputLayout;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Spinner;
 
+import com.backendless.Backendless;
+import com.backendless.async.callback.AsyncCallback;
+import com.backendless.exceptions.BackendlessFault;
+
+import java.util.ArrayList;
+
 import za.ac.cut.hockeyapplication.R;
+import za.ac.cut.hockeyapplication.model.Team;
 import za.ac.cut.hockeyapplication.model.Users;
 
-public class AddTeamActivity extends Activity {
+public class AddTeamActivity extends BaseActivity {
 
-    public static final int RC_ADD_TEAM = 100;
-    public static final String EXTRA_TEAM = "EXTRA_TEAM";
+    private static final String TAG = AddTeamActivity.class.getSimpleName();
 
     private TextInputLayout coachNameTextInputLayout;
     private TextInputEditText coachNameEditText;
@@ -56,7 +63,8 @@ public class AddTeamActivity extends Activity {
 
     private void setCoachName() {
         if (coach != null) {
-            coachNameEditText.setText(coach.getName());
+            coachNameTextInputLayout.setError(null);
+            coachNameEditText.setText(coach.toString());
         }
     }
 
@@ -83,16 +91,47 @@ public class AddTeamActivity extends Activity {
     }
 
     private void saveTeam(String ageGroup, String teamName) {
-        // TODO
+        showLoadingProgress();
+
+        Team team = new Team(ageGroup, teamName);
+
+        Backendless.Persistence.save(team, new AsyncCallback<Team>() {
+            @Override
+            public void handleResponse(Team savedTeam) {
+                ArrayList<Users> coaches = new ArrayList<>();
+                coaches.add(coach);
+                Backendless.Data.of(Team.class)
+                                .addRelation(savedTeam, "coach:Users:1", coaches, new AsyncCallback<Integer>() {
+                                    @Override
+                                    public void handleResponse(Integer response) {
+                                        hideLoadingProgress();
+                                        finish();
+                                    }
+
+                                    @Override
+                                    public void handleFault(BackendlessFault fault) {
+                                        hideLoadingProgress();
+                                        Log.e(TAG, "Error: " + fault.getMessage());
+                                    }
+                                });
+            }
+
+            @Override
+            public void handleFault(BackendlessFault fault) {
+                hideLoadingProgress();
+                Log.e(TAG, "Error: " + fault.getMessage());
+                // TODO
+            }
+        });
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if (requestCode == AddTeamActivity.RC_ADD_TEAM && resultCode == RESULT_OK) {
-            if (data != null && data.hasExtra(AddTeamActivity.EXTRA_TEAM)) {
-                coach = (Users) data.getSerializableExtra(AddTeamActivity.EXTRA_TEAM);
+        if (requestCode == SelectUserActivity.RC_SELECT_USER && resultCode == RESULT_OK) {
+            if (data != null && data.hasExtra(SelectUserActivity.EXTRA_USER)) {
+                coach = (Users) data.getSerializableExtra(SelectUserActivity.EXTRA_USER);
                 setCoachName();
             }
         }

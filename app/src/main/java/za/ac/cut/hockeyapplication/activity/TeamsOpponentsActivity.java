@@ -24,6 +24,8 @@ public class TeamsOpponentsActivity extends AppCompatActivity implements ViewPag
     private static final int TAB_TEAMS_POSITION = 0;
     private static final int TAB_OPPONENTS_POSITION = 1;
 
+    private ViewPagerAdapter viewPagerAdapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,7 +42,8 @@ public class TeamsOpponentsActivity extends AppCompatActivity implements ViewPag
         // Init view pager
         final ViewPager viewPager = findViewById(R.id.view_pager);
         viewPager.addOnPageChangeListener(this);
-        viewPager.setAdapter(new ViewPagerAdapter(getFragments(), getSupportFragmentManager()));
+        viewPagerAdapter = new ViewPagerAdapter(getFragments(), getSupportFragmentManager());
+        viewPager.setAdapter(viewPagerAdapter);
 
         // Init tab layout
         TabLayout tabLayout = findViewById(R.id.tab_layout);

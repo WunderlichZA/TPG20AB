@@ -22,8 +22,6 @@ import za.ac.cut.hockeyapplication.model.Users;
 
 public class SetRolesActivity extends AppCompatActivity {
 
-    private static int REQUEST_CODE = 1;
-
     private Users loggedInUser;
     String userRole;
 
@@ -80,11 +78,10 @@ public class SetRolesActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == REQUEST_CODE && resultCode == RESULT_OK) {
-            if (data != null) {
-                Bundle bundle = data.getExtras();
-                loggedInUser = (Users) bundle.getSerializable("USER_OBJECT");
-                selectUser.setText(loggedInUser.getName() + " " + loggedInUser.getSurname());
+        if (requestCode == SelectUserActivity.RC_SELECT_USER && resultCode == RESULT_OK) {
+            if (data != null && data.hasExtra(SelectUserActivity.EXTRA_USER)) {
+                loggedInUser = (Users) data.getSerializableExtra(SelectUserActivity.EXTRA_USER);
+                selectUser.setText(loggedInUser.toString());
             }
         }
     }

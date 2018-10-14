@@ -1,9 +1,10 @@
 package za.ac.cut.hockeyapplication.model;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.List;
 
-public class Team {
+public class Team implements Serializable {
 
     private String ObjectId;
     private String teamName;
@@ -11,6 +12,14 @@ public class Team {
     private List<Match> matches;
     private List<Player> players;
     private String ageGroup;
+
+    public Team() {
+    }
+
+    public Team(String ageGroup, String teamName) {
+        this.ageGroup = ageGroup;
+        this.teamName = teamName;
+    }
 
     public String getObjectId() {
         return ObjectId;
@@ -60,8 +69,8 @@ public class Team {
         this.ageGroup = ageGroup;
     }
 
-    public HashMap toMap(){
-        HashMap team =  new HashMap();
+    public HashMap toMap() {
+        HashMap team = new HashMap();
         team.put("coach", this.coach);
         team.put("matches", this.matches);
         team.put("name", this.teamName);
