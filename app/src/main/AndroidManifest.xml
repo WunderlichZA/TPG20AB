@@ -52,7 +52,11 @@
             android:label="@string/title_activity_add_opponent"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
-        <activity android:name=".activity.CoachMenuActivity"></activity>
+        <activity android:name=".activity.CoachMenuActivity" />
+        <activity android:name=".activity.AddPlayerActivity" />
+        <activity
+            android:name=".activity.MedicalInfoActivity"
+            android:label="@string/title_activity_medical_info"></activity>
     </application>
 
 </manifest>

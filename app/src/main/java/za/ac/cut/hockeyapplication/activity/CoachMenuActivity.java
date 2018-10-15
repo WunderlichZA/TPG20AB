@@ -25,6 +25,10 @@ public class CoachMenuActivity extends BaseActivity {
         if(v.getId() == R.id.button_logout_coach){
             logout();
         }
+
+        if(v.getId() == R.id.add_player_button){
+            startActivity(new Intent(CoachMenuActivity.this, AddPlayerActivity.class));
+        }
     }
 
     private void logout() {
