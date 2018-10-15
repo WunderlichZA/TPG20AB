@@ -1,13 +1,12 @@
 package za.ac.cut.hockeyapplication.fragment;
 
 import android.app.Activity;
-import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.view.View;
-import android.view.Window;
 import android.view.inputmethod.InputMethodManager;
 
 import za.ac.cut.hockeyapplication.R;
@@ -15,7 +14,7 @@ import za.ac.cut.hockeyapplication.R;
 public abstract class BaseFragment extends Fragment {
     public abstract String getTitle();
 
-    private Dialog dialog;
+    private AlertDialog dialog;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -29,10 +28,9 @@ public abstract class BaseFragment extends Fragment {
     }
 
     protected void showLoadingProgress() {
-        dialog = new Dialog(requireActivity());
-        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        AlertDialog.Builder builder = new AlertDialog.Builder(requireContext());
+        builder.setView(R.layout.loading_dialog_layout);
         dialog.setCancelable(false);
-        dialog.setContentView(R.layout.loading_dialog_layout);
         dialog.show();
     }
 

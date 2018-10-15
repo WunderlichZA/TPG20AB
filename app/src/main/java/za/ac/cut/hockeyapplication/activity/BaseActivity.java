@@ -1,10 +1,9 @@
 package za.ac.cut.hockeyapplication.activity;
 
-import android.app.Dialog;
 import android.content.Context;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.view.Window;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Toast;
 
@@ -16,7 +15,7 @@ import za.ac.cut.hockeyapplication.R;
 
 public abstract class BaseActivity extends AppCompatActivity {
 
-    private Dialog dialog;
+    private AlertDialog dialog;
 
     @Override
     protected void onDestroy() {
@@ -25,10 +24,9 @@ public abstract class BaseActivity extends AppCompatActivity {
     }
 
     protected void showLoadingProgress() {
-        dialog = new Dialog(this);
-        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setView(R.layout.loading_dialog_layout);
         dialog.setCancelable(false);
-        dialog.setContentView(R.layout.loading_dialog_layout);
         dialog.show();
     }
 
