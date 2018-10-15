@@ -26,6 +26,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     protected void showLoadingProgress() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setView(R.layout.loading_dialog_layout);
+        dialog = builder.create();
         dialog.setCancelable(false);
         dialog.show();
     }

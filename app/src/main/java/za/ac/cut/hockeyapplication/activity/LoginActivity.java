@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.button.MaterialButton;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
@@ -20,7 +19,7 @@ import com.backendless.exceptions.BackendlessFault;
 import za.ac.cut.hockeyapplication.R;
 import za.ac.cut.hockeyapplication.helper.UserHelper;
 
-public class LoginActivity extends AppCompatActivity {
+public class LoginActivity extends BaseActivity {
 
     private MaterialButton buttonRegister, buttonLogin, buttonReset;
     private EditText etUsername, etPassword;
@@ -51,9 +50,11 @@ public class LoginActivity extends AppCompatActivity {
                 username = etUsername.getText().toString();
                 password = etPassword.getText().toString();
                 if (!(TextUtils.isEmpty(username) && TextUtils.isEmpty(password))) {
+                    showLoadingProgress();
                     Backendless.UserService.login(username, password, new AsyncCallback<BackendlessUser>() {
                         @Override
                         public void handleResponse(BackendlessUser response) {
+                            hideLoadingProgress();
                             String role = response.getProperty(UserHelper.PROPERTY_ROLE).toString();
                             if (role.equalsIgnoreCase(UserHelper.ROLE_ADMIN)) {
                                 startActivity(new Intent(LoginActivity.this, MainActivity.class));
@@ -71,6 +72,7 @@ public class LoginActivity extends AppCompatActivity {
 
                         @Override
                         public void handleFault(BackendlessFault fault) {
+                            hideLoadingProgress();
                             Toast.makeText(LoginActivity.this, fault.getMessage(), Toast.LENGTH_LONG)
                                  .show();
                         }

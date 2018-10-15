@@ -64,7 +64,7 @@ public class AddTeamActivity extends BaseActivity {
     private void setCoachName() {
         if (coach != null) {
             coachNameTextInputLayout.setError(null);
-            coachNameEditText.setText(coach.toString());
+            coachNameEditText.setText(coach.getFullName());
         }
     }
 

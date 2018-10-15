@@ -44,7 +44,9 @@
                 <android.support.design.widget.TextInputEditText
                     android:id="@+id/username_edit_text"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:inputType="textEmailAddress"
+                    android:text="lezoig@gmail.com"/>
             </android.support.design.widget.TextInputLayout>
 
             <android.support.design.widget.TextInputLayout
@@ -58,7 +60,8 @@
                     android:id="@+id/user_password_edit_text"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="textPassword" />
+                    android:inputType="textPassword"
+                    android:text="254"/>
             </android.support.design.widget.TextInputLayout>
 
             <android.support.design.button.MaterialButton

@@ -20,15 +20,15 @@ import za.ac.cut.hockeyapplication.adapter.OpponentsAdapter;
 import za.ac.cut.hockeyapplication.model.Opponent;
 
 public class OpponentsFragment extends BaseFragment implements OpponentsAdapter.OpponentsClickListener {
-    public static final String TAG = OpponentsFragment.class.getSimpleName();
+    public static final String TAG = "Opponents";
     public static final String EXTRA_SELECTABLE = "EXTRA_SELECTABLE";
 
     private OpponentsAdapter adapter;
 
-    public static TeamsFragment newInstance(boolean selectable) {
+    public static OpponentsFragment newInstance(boolean selectable) {
         Bundle args = new Bundle();
         args.putBoolean(EXTRA_SELECTABLE, selectable);
-        TeamsFragment fragment = new TeamsFragment();
+        OpponentsFragment fragment = new OpponentsFragment();
         fragment.setArguments(args);
         return fragment;
     }

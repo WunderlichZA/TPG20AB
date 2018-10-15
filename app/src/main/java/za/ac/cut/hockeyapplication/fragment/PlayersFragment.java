@@ -20,7 +20,7 @@ import za.ac.cut.hockeyapplication.adapter.PlayersAdapter;
 import za.ac.cut.hockeyapplication.model.Player;
 
 public class PlayersFragment extends BaseFragment implements PlayersAdapter.PlayerClickListener {
-    public static final String TAG = PlayersFragment.class.getSimpleName();
+    public static final String TAG = "Players";
     public static final String EXTRA_VIEWABLE = "EXTRA_VIEWABLE";
 
     private PlayersAdapter adapter;

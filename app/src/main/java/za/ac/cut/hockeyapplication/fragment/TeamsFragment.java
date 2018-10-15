@@ -19,7 +19,7 @@ import za.ac.cut.hockeyapplication.adapter.TeamsAdapter;
 import za.ac.cut.hockeyapplication.model.Team;
 
 public class TeamsFragment extends BaseFragment implements TeamsAdapter.TeamClickListener {
-    public static final String TAG = TeamsFragment.class.getSimpleName();
+    public static final String TAG = "Teams";
     public static final String EXTRA_SELECTABLE = "EXTRA_SELECTABLE";
 
     private TeamsAdapter adapter;

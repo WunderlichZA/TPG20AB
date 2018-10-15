@@ -30,6 +30,7 @@ public abstract class BaseFragment extends Fragment {
     protected void showLoadingProgress() {
         AlertDialog.Builder builder = new AlertDialog.Builder(requireContext());
         builder.setView(R.layout.loading_dialog_layout);
+        dialog = builder.create();
         dialog.setCancelable(false);
         dialog.show();
     }
