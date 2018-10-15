@@ -5,7 +5,7 @@ import java.util.HashMap;
 
 public class Match implements Serializable {
 
-    private String ObjectId;
+    private String objectId;
     private Opponent opponent;
     private Team team;
 
@@ -14,11 +14,11 @@ public class Match implements Serializable {
     }
 
     public String getObjectId() {
-        return ObjectId;
+        return objectId;
     }
 
     public void setObjectId(String objectId) {
-        ObjectId = objectId;
+        this.objectId = objectId;
     }
 
     public void setOpponent(Opponent opponent) {

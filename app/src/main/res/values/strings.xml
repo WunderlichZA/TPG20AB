@@ -22,4 +22,5 @@
     <string name="title_activity_add_opponent">AddOpponentActivity</string>
     <string name="title_activity_select_team">SelectTeamActivity</string>
     <string name="title_activity_move_players">MovePlayersActivity</string>
+    <string name="title_activity_medical_info">MedicalInfoActivity</string>
 </resources>

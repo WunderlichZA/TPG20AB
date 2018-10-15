@@ -3,7 +3,7 @@ package za.ac.cut.hockeyapplication.model;
 import java.io.Serializable;
 import java.util.HashMap;
 
-public class MedicalInfo implements Serializable {
+public class MedicalAidInfo implements Serializable {
 
     private String objectId;
     private String medicalAidName;

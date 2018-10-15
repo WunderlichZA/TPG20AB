@@ -8,7 +8,7 @@ public class Player implements Serializable {
     private String objectId;
     private String surname;
     private String name;
-    private MedicalInfo medicalInfo;
+    private MedicalAidInfo medicalAidInfo;
     private Team team;
 
     public String getObjectId() {
@@ -35,12 +35,12 @@ public class Player implements Serializable {
         this.name = name;
     }
 
-    public MedicalInfo getMedicalInfo() {
-        return medicalInfo;
+    public MedicalAidInfo getMedicalAidInfo() {
+        return medicalAidInfo;
     }
 
-    public void setMedicalInfo(MedicalInfo medicalInfo) {
-        this.medicalInfo = medicalInfo;
+    public void setMedicalAidInfo(MedicalAidInfo medicalAidInfo) {
+        this.medicalAidInfo = medicalAidInfo;
     }
 
     public Team getTeam() {
@@ -57,7 +57,7 @@ public class Player implements Serializable {
 
     public HashMap toMap() {
         HashMap player = new HashMap();
-        player.put("medicalAidInfo", this.medicalInfo);
+        player.put("medicalAidInfo", this.medicalAidInfo);
         player.put("surname", this.surname);
         player.put("team", this.team);
         return player;

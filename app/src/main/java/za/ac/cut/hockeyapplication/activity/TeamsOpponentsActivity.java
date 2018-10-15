@@ -32,7 +32,7 @@ public class TeamsOpponentsActivity extends AppCompatActivity implements ViewPag
         setContentView(R.layout.activity_teams_opponents);
 
         // Set toolbar
-        Toolbar toolbar = findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar_include).findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         if (getSupportActionBar() != null) {
             getSupportActionBar().setTitle(R.string.title_teams_opponents);

@@ -19,6 +19,9 @@ public class CoachMenuActivity extends BaseActivity {
         int id = view.getId();
 
         switch (id) {
+            case R.id.add_player_button:
+                AddPlayerActivity.start(CoachMenuActivity.this);
+                break;
             case R.id.my_players_button:
                 MyPlayersActivity.start(CoachMenuActivity.this);
                 break;

@@ -11,7 +11,7 @@ import com.backendless.async.callback.AsyncCallback;
 import com.backendless.exceptions.BackendlessFault;
 
 import za.ac.cut.hockeyapplication.R;
-import za.ac.cut.hockeyapplication.model.MedicalInfo;
+import za.ac.cut.hockeyapplication.model.MedicalAidInfo;
 import za.ac.cut.hockeyapplication.model.Player;
 
 public class PlayerInfoActivity extends BaseActivity {
@@ -20,7 +20,7 @@ public class PlayerInfoActivity extends BaseActivity {
     public static final String EXTRA_PLAYER= "EXTRA_PLAYER";
 
     private Player player;
-    private MedicalInfo medicalInfo;
+    private MedicalAidInfo medicalInfo;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -40,7 +40,7 @@ public class PlayerInfoActivity extends BaseActivity {
         Backendless.Persistence.save(player, new AsyncCallback<Player>() {
             @Override
             public void handleResponse(Player savedPlayer) {
-                savedPlayer.setMedicalInfo(medicalInfo);
+                savedPlayer.setMedicalAidInfo(medicalInfo);
                 Backendless.Persistence.save(player, new AsyncCallback<Player>() {
                     @Override
                     public void handleResponse(Player response) {

@@ -6,7 +6,7 @@ import java.util.List;
 
 public class Team implements Serializable {
 
-    private String ObjectId;
+    private String objectId;
     private String teamName;
     private Users coach;
     private List<Match> matches;
@@ -22,11 +22,11 @@ public class Team implements Serializable {
     }
 
     public String getObjectId() {
-        return ObjectId;
+        return objectId;
     }
 
     public void setObjectId(String objectId) {
-        ObjectId = objectId;
+        this.objectId = objectId;
     }
 
     public Users getCoach() {
