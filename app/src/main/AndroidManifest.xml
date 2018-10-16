@@ -28,13 +28,10 @@
         <activity
             android:name=".activity.RegisterActivity"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateAlwaysHidden|adjustResize"/>
+            android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
         <activity
             android:name=".activity.SetRolesActivity"
             android:theme="@style/HockeyAppTheme" />
-        <activity
-            android:name=".activity.UserActivity"
-            android:screenOrientation="portrait" />
         <activity
             android:name=".activity.SelectUserActivity"
             android:screenOrientation="portrait" />

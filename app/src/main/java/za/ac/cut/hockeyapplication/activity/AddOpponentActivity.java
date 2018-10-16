@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.design.button.MaterialButton;
 import android.support.design.widget.TextInputEditText;
 import android.support.design.widget.TextInputLayout;
+import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
@@ -26,6 +27,15 @@ public class AddOpponentActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_opponent);
+
+        // Set toolbar
+        // Set toolbar
+        Toolbar toolbar = findViewById(R.id.toolbar_include);
+        setSupportActionBar(toolbar);
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setTitle(R.string.title_activity_add_opponent);
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
 
         final TextInputLayout opponentNameTextInputLayout = findViewById(R.id.opponent_name_text_input);
         opponentNameEditText = findViewById(R.id.opponent_name_edit_text);

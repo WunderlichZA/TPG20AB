@@ -7,6 +7,7 @@ import android.support.annotation.Nullable;
 import android.support.design.button.MaterialButton;
 import android.support.design.widget.TextInputEditText;
 import android.support.design.widget.TextInputLayout;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
@@ -38,6 +39,14 @@ public class MovePlayersActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_move_players);
+
+        // Set toolbar
+        Toolbar toolbar = findViewById(R.id.toolbar_include);
+        setSupportActionBar(toolbar);
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setTitle(R.string.title_activity_move_players);
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
 
         playerNameTextInputLayout = findViewById(R.id.player_name_text_input);
         playerNameTextInputLayout.setOnClickListener(new View.OnClickListener() {
@@ -107,7 +116,7 @@ public class MovePlayersActivity extends BaseActivity {
         ArrayList<Team> teams = new ArrayList<>();
         teams.add(team);
         Backendless.Data.of(Player.class)
-                        .addRelation(player, "team:Team:1", teams, new AsyncCallback<Integer>() {
+                        .setRelation(player, "team:Team:1", teams, new AsyncCallback<Integer>() {
                             @Override
                             public void handleResponse(Integer response) {
                                 hideLoadingProgress();
@@ -121,7 +130,7 @@ public class MovePlayersActivity extends BaseActivity {
                                 Log.e(TAG, "Error: " + fault.getMessage());
                             }
                         });
-}
+    }
 
     @Override
     protected void onActivityResult(

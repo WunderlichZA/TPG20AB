@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.design.button.MaterialButton;
 import android.support.design.widget.TextInputEditText;
 import android.support.design.widget.TextInputLayout;
+import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.View;
 
@@ -36,6 +37,14 @@ public class MedicalInfoActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_medical_info);
+
+        // Set toolbar
+        Toolbar toolbar = findViewById(R.id.toolbar_include);
+        setSupportActionBar(toolbar);
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setTitle(R.string.title_activity_medical_info);
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
 
         initViews();
 
@@ -82,7 +91,7 @@ public class MedicalInfoActivity extends BaseActivity {
     }
 
     public void saveMedicalInfo() {
-        if(medicalInfo == null) {
+        if (medicalInfo == null) {
             medicalInfo = new MedicalAidInfo();
         }
         medicalInfo.setMedicalAidName(medicalAidNameEditText.getText().toString());

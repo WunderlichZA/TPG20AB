@@ -33,7 +33,9 @@ public class PlayersAdapter extends RecyclerView.Adapter<PlayersAdapter.PlayerVi
     }
 
     @Override
-    public void onBindViewHolder(@NonNull PlayersAdapter.PlayerViewHolder viewHolder, int position) {
+    public void onBindViewHolder(
+            @NonNull PlayersAdapter.PlayerViewHolder viewHolder, int position
+    ) {
         viewHolder.bind(players.get(position));
     }
 

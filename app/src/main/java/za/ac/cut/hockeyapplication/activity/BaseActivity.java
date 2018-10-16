@@ -62,8 +62,7 @@ public abstract class BaseActivity extends AppCompatActivity {
             @Override
             public void handleFault(BackendlessFault fault) {
                 hideLoadingProgress();
-                Toast.makeText(BaseActivity.this, fault.getMessage(), Toast.LENGTH_LONG)
-                     .show();
+                Toast.makeText(BaseActivity.this, fault.getMessage(), Toast.LENGTH_LONG).show();
             }
         });
     }

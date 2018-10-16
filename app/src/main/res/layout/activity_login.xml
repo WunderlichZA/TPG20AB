@@ -46,7 +46,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="textEmailAddress"
-                    android:text="lezoig@gmail.com"/>
+                    android:text="lezoig@gmail.com" />
             </android.support.design.widget.TextInputLayout>
 
             <android.support.design.widget.TextInputLayout
@@ -61,7 +61,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="textPassword"
-                    android:text="254"/>
+                    android:text="254" />
             </android.support.design.widget.TextInputLayout>
 
             <android.support.design.button.MaterialButton

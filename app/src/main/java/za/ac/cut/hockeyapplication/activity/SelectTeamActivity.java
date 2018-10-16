@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v7.widget.Toolbar;
 
 import za.ac.cut.hockeyapplication.R;
 import za.ac.cut.hockeyapplication.fragment.TeamsFragment;
@@ -19,6 +20,14 @@ public class SelectTeamActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_select_team);
+
+        // Set toolbar
+        Toolbar toolbar = findViewById(R.id.toolbar_include);
+        setSupportActionBar(toolbar);
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setTitle(R.string.title_activity_select_team);
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
 
         // Add fragment
         Fragment teamsFragment = getSupportFragmentManager().findFragmentByTag(TeamsFragment.TAG);

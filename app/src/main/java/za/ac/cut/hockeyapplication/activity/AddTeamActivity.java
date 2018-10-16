@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.design.button.MaterialButton;
 import android.support.design.widget.TextInputEditText;
 import android.support.design.widget.TextInputLayout;
+import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
@@ -36,6 +37,14 @@ public class AddTeamActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_team);
+
+        // Set toolbar
+        Toolbar toolbar = findViewById(R.id.toolbar_include);
+        setSupportActionBar(toolbar);
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setTitle(R.string.title_activity_add_team);
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
 
         final Spinner ageGroupSpinner = findViewById(R.id.age_group_spinner);
         coachNameTextInputLayout = findViewById(R.id.coach_name_text_input);

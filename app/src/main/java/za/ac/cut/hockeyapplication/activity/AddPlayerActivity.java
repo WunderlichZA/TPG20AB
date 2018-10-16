@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.design.button.MaterialButton;
 import android.support.design.widget.TextInputEditText;
 import android.support.design.widget.TextInputLayout;
+import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.View;
 
@@ -30,7 +31,6 @@ public class AddPlayerActivity extends BaseActivity {
     private TextInputEditText selectTeamEditText;
     private TextInputLayout selectTeamTextInputLayout;
 
-    private Player player;
     private Team team;
     private MedicalAidInfo medicalInfo;
 
@@ -38,6 +38,14 @@ public class AddPlayerActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_player);
+
+        // Set toolbar
+        Toolbar toolbar = findViewById(R.id.toolbar_include);
+        setSupportActionBar(toolbar);
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setTitle(R.string.title_activity_add_player);
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
 
         playerNameEditText = findViewById(R.id.player_name_edit_text);
         playerSurnameEditText = findViewById(R.id.player_surname_edit_text);
@@ -114,11 +122,6 @@ public class AddPlayerActivity extends BaseActivity {
         Player player = new Player();
         player.setName(playerName);
         player.setSurname(playerSurname);
-
-        if(medicalInfo == null) {
-            //medicalInfo = new MedicalAidInfo();
-        }
-
         player.setMedicalAidInfo(medicalInfo);
         player.setTeam(team);
 
@@ -158,20 +161,25 @@ public class AddPlayerActivity extends BaseActivity {
                 Player savedPlayer = Backendless.Data.of(Player.class).save(player);
                 ArrayList<Team> teamCollection = new ArrayList<>();
                 teamCollection.add(player.getTeam());
-                Backendless.Data.of(Player.class).addRelation(savedPlayer, "team:Team:1", teamCollection);
+                Backendless.Data.of(Player.class)
+                                .addRelation(savedPlayer, "team:Team:1", teamCollection);
 
-                if(player.getMedicalAidInfo() != null) {
-                    // Save medical info
-                    MedicalAidInfo savedMedicalInfo = Backendless.Data.of(MedicalAidInfo.class).save(player.getMedicalAidInfo());
-                    ArrayList<Player> playerCollection = new ArrayList<>();
-                    playerCollection.add(savedPlayer);
-                    Backendless.Data.of(MedicalAidInfo.class).addRelation(savedMedicalInfo, "player:Player:1", playerCollection);
-                    ArrayList<MedicalAidInfo> medicalInfoCollection = new ArrayList<>();
-                    medicalInfoCollection.add(savedMedicalInfo);
-                    Backendless.Data.of(Player.class).addRelation(savedPlayer, "medicalAidInfo:MedicalAidInfo:1", medicalInfoCollection);
-                }
+                // Add player to team
+                ArrayList<Player> playerCollection = new ArrayList<>();
+                playerCollection.add(savedPlayer);
+                Backendless.Data.of(Team.class)
+                                .addRelation(player.getTeam(), "players:Player:n", playerCollection);
 
-            } catch (Exception exception)  {
+                // Save medical info
+                MedicalAidInfo savedMedicalInfo = Backendless.Data.of(MedicalAidInfo.class)
+                                                                  .save(player.getMedicalAidInfo());
+                Backendless.Data.of(MedicalAidInfo.class)
+                                .addRelation(savedMedicalInfo, "player:Player:1", playerCollection);
+                ArrayList<MedicalAidInfo> medicalInfoCollection = new ArrayList<>();
+                medicalInfoCollection.add(savedMedicalInfo);
+                Backendless.Data.of(Player.class)
+                                .addRelation(savedPlayer, "medicalAidInfo:MedicalAidInfo:1", medicalInfoCollection);
+            } catch (Exception exception) {
                 exception.printStackTrace();
                 return false;
             }
@@ -182,7 +190,7 @@ public class AddPlayerActivity extends BaseActivity {
         @Override
         protected void onPostExecute(Boolean result) {
             hideLoadingProgress();
-            if(result != null && result) {
+            if (result != null && result) {
                 finish();
             } else {
                 // show error

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
                                              xmlns:app="http://schemas.android.com/apk/res-auto"
-                                             xmlns:tools="http://schemas.android.com/tools"
                                              android:layout_width="match_parent"
                                              android:layout_height="match_parent">
+
     <include
         android:id="@+id/toolbar_include"
         layout="@layout/toolbar"
@@ -54,7 +54,7 @@
                 android:text="Select a player to see their current team"
                 android:paddingTop="16dp"
                 android:paddingBottom="16dp"
-                app:layout_constraintTop_toBottomOf="@id/player_name_text_input"/>
+                app:layout_constraintTop_toBottomOf="@id/player_name_text_input" />
 
             <android.support.design.widget.TextInputLayout
                 android:id="@+id/player_team_text_input"
@@ -89,6 +89,5 @@
         </android.support.constraint.ConstraintLayout>
 
     </ScrollView>
-
 
 </android.support.constraint.ConstraintLayout>

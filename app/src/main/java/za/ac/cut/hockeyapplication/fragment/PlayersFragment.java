@@ -68,35 +68,36 @@ public class PlayersFragment extends BaseFragment implements PlayersAdapter.Play
 
         DataQueryBuilder query = DataQueryBuilder.create();
         query.setRelated("team");
-        Backendless.Persistence.of(Player.class).find(query, new BackendlessCallback<List<Player>>() {
-            @Override
-            public void handleResponse(List<Player> players) {
-                hideLoadingProgress();
-                if (players != null && !players.isEmpty()) {
-                    adapter.setData(players);
-                } else {
-                    // TODO
-                    Log.e(TAG, "no players found");
-                }
-            }
+        Backendless.Persistence.of(Player.class)
+                               .find(query, new BackendlessCallback<List<Player>>() {
+                                   @Override
+                                   public void handleResponse(List<Player> players) {
+                                       hideLoadingProgress();
+                                       if (players != null && !players.isEmpty()) {
+                                           adapter.setData(players);
+                                       } else {
+                                           // TODO
+                                           Log.e(TAG, "no players found");
+                                       }
+                                   }
 
-            @Override
-            public void handleFault(BackendlessFault fault) {
-                hideLoadingProgress();
-                // TODO
-                if (fault != null) {
-                    Log.e(TAG, "Error: " + fault.getMessage());
-                }
-            }
-        });
+                                   @Override
+                                   public void handleFault(BackendlessFault fault) {
+                                       hideLoadingProgress();
+                                       // TODO
+                                       if (fault != null) {
+                                           Log.e(TAG, "Error: " + fault.getMessage());
+                                       }
+                                   }
+                               });
     }
 
     @Override
     public void onPlayerClick(Player player) {
         if (player != null) {
-            if(viewable) {
+            if (viewable) {
                 // TODO
-            } else if(requireActivity() instanceof SelectPlayerActivity) {
+            } else if (requireActivity() instanceof SelectPlayerActivity) {
                 ((SelectPlayerActivity) requireActivity()).setResult(player);
             }
         }

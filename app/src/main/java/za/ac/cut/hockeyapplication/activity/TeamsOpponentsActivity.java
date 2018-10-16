@@ -7,7 +7,6 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 
@@ -19,7 +18,7 @@ import za.ac.cut.hockeyapplication.adapter.ViewPagerAdapter;
 import za.ac.cut.hockeyapplication.fragment.OpponentsFragment;
 import za.ac.cut.hockeyapplication.fragment.TeamsFragment;
 
-public class TeamsOpponentsActivity extends AppCompatActivity implements ViewPager.OnPageChangeListener {
+public class TeamsOpponentsActivity extends BaseActivity implements ViewPager.OnPageChangeListener {
 
     private static final int TAB_TEAMS_POSITION = 0;
     private static final int TAB_OPPONENTS_POSITION = 1;
@@ -32,10 +31,10 @@ public class TeamsOpponentsActivity extends AppCompatActivity implements ViewPag
         setContentView(R.layout.activity_teams_opponents);
 
         // Set toolbar
-        Toolbar toolbar = findViewById(R.id.toolbar_include).findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar_include);
         setSupportActionBar(toolbar);
         if (getSupportActionBar() != null) {
-            getSupportActionBar().setTitle(R.string.title_teams_opponents);
+            getSupportActionBar().setTitle(R.string.title_activity_teams_opponents);
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
 

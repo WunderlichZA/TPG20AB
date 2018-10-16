@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 
 import com.backendless.Backendless;
@@ -17,7 +18,7 @@ import za.ac.cut.hockeyapplication.model.Player;
 public class PlayerInfoActivity extends BaseActivity {
 
     private static final String TAG = PlayerInfoActivity.class.getSimpleName();
-    public static final String EXTRA_PLAYER= "EXTRA_PLAYER";
+    public static final String EXTRA_PLAYER = "EXTRA_PLAYER";
 
     private Player player;
     private MedicalAidInfo medicalInfo;
@@ -27,7 +28,15 @@ public class PlayerInfoActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_player_info);
 
-        if(getIntent().hasExtra(EXTRA_PLAYER)) {
+        // Set toolbar
+        Toolbar toolbar = findViewById(R.id.toolbar_include);
+        setSupportActionBar(toolbar);
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setTitle(R.string.title_activity_player_info);
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
+
+        if (getIntent().hasExtra(EXTRA_PLAYER)) {
             player = (Player) getIntent().getSerializableExtra(EXTRA_PLAYER);
         } else {
             finish();
