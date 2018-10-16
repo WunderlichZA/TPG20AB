@@ -56,7 +56,7 @@
                 android:id="@+id/coach_name_text_input"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Team Coach"
+                android:hint="Select Coach"
                 android:clickable="true"
                 android:focusable="true"
                 app:layout_constraintTop_toBottomOf="@id/age_group_container">

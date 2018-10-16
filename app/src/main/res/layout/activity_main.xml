@@ -4,7 +4,7 @@
                 xmlns:android="http://schemas.android.com/apk/res/android">
 
     <include
-        android:id="@+id/hockeyToolbar"
+        android:id="@+id/toolbar_include"
         layout="@layout/toolbar" />
 
     <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
@@ -12,7 +12,7 @@
                 xmlns:tools="http://schemas.android.com/tools"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_below="@+id/hockeyToolbar"
+                android:layout_below="@+id/toolbar_include"
                 tools:context=".activity.MainActivity">
 
         <LinearLayout
@@ -59,7 +59,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:onClick="onClick"
-                    android:text="Add Team / Opponent" />
+                    android:text="Teams &amp; Opponents" />
 
                 <android.support.design.button.MaterialButton
                     android:id="@+id/move_players_button"
@@ -111,13 +111,6 @@
                     android:onClick="onClick"
                     android:text="Matches" />
             </LinearLayout>
-
-            <android.support.design.button.MaterialButton
-                android:id="@+id/logout_button"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:onClick="onClick"
-                android:text="Logout" />
         </LinearLayout>
 
     </ScrollView>

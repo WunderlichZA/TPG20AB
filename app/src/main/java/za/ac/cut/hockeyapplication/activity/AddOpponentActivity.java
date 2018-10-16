@@ -8,8 +8,8 @@ import android.support.design.widget.TextInputEditText;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
 
 import com.backendless.Backendless;
 import com.backendless.async.callback.AsyncCallback;
@@ -43,6 +43,7 @@ public class AddOpponentActivity extends BaseActivity {
         saveOpponentButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                hideKeyboard();
                 String opponentName = opponentNameEditText.getText().toString();
                 boolean showError = TextUtils.isEmpty(opponentName);
                 opponentNameTextInputLayout.setError(showError ? "Enter opponent name" : null);
@@ -64,14 +65,16 @@ public class AddOpponentActivity extends BaseActivity {
             @Override
             public void handleResponse(Opponent response) {
                 hideLoadingProgress();
+                Toast.makeText(AddOpponentActivity.this, "Opponent added successfully", Toast.LENGTH_SHORT)
+                     .show();
                 finish();
             }
 
             @Override
             public void handleFault(BackendlessFault fault) {
                 hideLoadingProgress();
-                Log.e(TAG, "Error: " + fault.getMessage());
-                // TODO
+                Toast.makeText(AddOpponentActivity.this, fault.getMessage(), Toast.LENGTH_SHORT)
+                     .show();
             }
         });
     }

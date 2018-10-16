@@ -28,7 +28,7 @@ public class PlayersAdapter extends RecyclerView.Adapter<PlayersAdapter.PlayerVi
             @NonNull ViewGroup viewGroup, int position
     ) {
         LayoutInflater inflater = LayoutInflater.from(viewGroup.getContext());
-        View view = inflater.inflate(R.layout.team_row_layout, viewGroup, false);
+        View view = inflater.inflate(R.layout.player_row_layout, viewGroup, false);
         return new PlayersAdapter.PlayerViewHolder(view, playerClickListener);
     }
 
@@ -57,15 +57,14 @@ public class PlayersAdapter extends RecyclerView.Adapter<PlayersAdapter.PlayerVi
 
         private PlayerClickListener playerClickListener;
         private TextView name;
+        private TextView team;
         private Player player;
 
         public PlayerViewHolder(@NonNull View itemView, PlayerClickListener clickListener) {
             super(itemView);
 
             this.playerClickListener = clickListener;
-            name = itemView.findViewById(R.id.name);
-            name.setClickable(playerClickListener != null);
-            name.setOnClickListener(new View.OnClickListener() {
+            itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     if (playerClickListener != null && playerClickListener != null) {
@@ -73,11 +72,17 @@ public class PlayersAdapter extends RecyclerView.Adapter<PlayersAdapter.PlayerVi
                     }
                 }
             });
+            itemView.setClickable(playerClickListener != null);
+            name = itemView.findViewById(R.id.name);
+            team = itemView.findViewById(R.id.team);
         }
 
         public void bind(Player player) {
             this.player = player;
             name.setText(player.getFullName());
+            if (player.getTeam() != null) {
+                team.setText("Team: " + player.getTeam().getTeamName());
+            }
         }
     }
 }

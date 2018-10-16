@@ -7,7 +7,6 @@ import android.support.design.button.MaterialButton;
 import android.support.design.widget.TextInputEditText;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.widget.Toolbar;
-import android.text.TextUtils;
 import android.view.View;
 
 import za.ac.cut.hockeyapplication.R;
@@ -57,9 +56,8 @@ public class MedicalInfoActivity extends BaseActivity {
         buttonSaveMedicalInfo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (areValidFields()) {
-                    saveMedicalInfo();
-                }
+                hideKeyboard();
+                saveMedicalInfo();
             }
         });
     }
@@ -86,7 +84,7 @@ public class MedicalInfoActivity extends BaseActivity {
             medicalAidNumberEditText.setText(medicalInfo.getMedicalAidNumber());
             allergiesEditText.setText(medicalInfo.getAllergies());
             parentOneCellNumberEditText.setText(medicalInfo.getParentOneCellNumber());
-            parentTwoCellNumberEditText.setText(medicalInfo.getParentTwpCellNumber());
+            parentTwoCellNumberEditText.setText(medicalInfo.getParentTwoCellNumber());
         }
     }
 
@@ -99,66 +97,11 @@ public class MedicalInfoActivity extends BaseActivity {
         medicalInfo.setMedicalAidNumber(medicalAidNumberEditText.getText().toString());
         medicalInfo.setAllergies(allergiesEditText.getText().toString());
         medicalInfo.setParentOneCellNumber(parentOneCellNumberEditText.getText().toString());
-        medicalInfo.setParentTwpCellNumber(parentTwoCellNumberEditText.getText().toString());
+        medicalInfo.setParentTwoCellNumber(parentTwoCellNumberEditText.getText().toString());
         Intent intent = new Intent(MedicalInfoActivity.this, AddPlayerActivity.class);
         intent.putExtra(EXTRA_MEDICAL_INFO, medicalInfo);
         setResult(RESULT_OK, intent);
         finish();
-    }
-
-    private boolean areValidFields() {
-        boolean valid = true;
-        String error = null;
-
-        if (TextUtils.isEmpty(medicalAidNameEditText.getText().toString())) {
-            error = "Enter Medical Aid Name";
-            valid = false;
-        }
-        medicalAidNameTextInputLayout.setError(error);
-        // Reset error
-        error = null;
-
-        if (TextUtils.isEmpty(medicalAidPlanEditText.getText().toString())) {
-            error = "Enter Aid Plan";
-            valid = false;
-        }
-        medicalAidPlanTextInputLayout.setError(error);
-        // Reset error
-        error = null;
-
-        if (TextUtils.isEmpty(medicalAidNumberEditText.getText().toString())) {
-            error = "Enter Medical Aid Number";
-            valid = false;
-        }
-        medicalAidNumberTextInputLayout.setError(error);
-        // Reset error
-        error = null;
-
-        if (TextUtils.isEmpty(allergiesEditText.getText().toString())) {
-            error = "Enter Allergies";
-            valid = false;
-        }
-        allergiesTextInputLayout.setError(error);
-        // Reset error
-        error = null;
-
-        if (TextUtils.isEmpty(parentOneCellNumberEditText.getText().toString())) {
-            error = "Enter Parent Cell Number";
-            valid = false;
-        }
-        parentOneCellNumberTextInputLayout.setError(error);
-        // Reset error
-        error = null;
-
-        if (TextUtils.isEmpty(parentTwoCellNumberEditText.getText().toString())) {
-            error = "Enter Parent Cell Number";
-            valid = false;
-        }
-        parentTwoCellNumberInputLayout.setError(error);
-        // Reset error
-        error = null;
-
-        return valid;
     }
 
     public static void start(Activity activity, MedicalAidInfo medicalInfo) {

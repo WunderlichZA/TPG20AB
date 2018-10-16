@@ -64,6 +64,7 @@ public class AddPlayerActivity extends BaseActivity {
         buttonSavePlayer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                hideKeyboard();
                 if (areValidFields()) {
                     savePlayer();
                 }
@@ -74,6 +75,7 @@ public class AddPlayerActivity extends BaseActivity {
         buttonMedicalInfo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                hideKeyboard();
                 MedicalInfoActivity.start(AddPlayerActivity.this, medicalInfo);
             }
         });
@@ -105,6 +107,12 @@ public class AddPlayerActivity extends BaseActivity {
         // Reset error
         error = null;
 
+        if (team == null) {
+            error = "Select team";
+            valid = false;
+        }
+        selectTeamTextInputLayout.setError(error);
+
         return valid;
     }
 
@@ -122,6 +130,9 @@ public class AddPlayerActivity extends BaseActivity {
         Player player = new Player();
         player.setName(playerName);
         player.setSurname(playerSurname);
+        if (medicalInfo == null) {
+            medicalInfo = new MedicalAidInfo();
+        }
         player.setMedicalAidInfo(medicalInfo);
         player.setTeam(team);
 

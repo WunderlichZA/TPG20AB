@@ -11,7 +11,7 @@ public class MedicalAidInfo implements Serializable {
     private String medicalAidNumber;
     private String allergies;
     private String parentOneCellNumber;
-    private String parentTwpCellNumber;
+    private String parentTwoCellNumber;
     private Player player;
 
     public String getObjectId() {
@@ -62,12 +62,12 @@ public class MedicalAidInfo implements Serializable {
         this.parentOneCellNumber = parentOneCellNumber;
     }
 
-    public String getParentTwpCellNumber() {
-        return parentTwpCellNumber;
+    public String getParentTwoCellNumber() {
+        return parentTwoCellNumber;
     }
 
-    public void setParentTwpCellNumber(String parentTwpCellNumber) {
-        this.parentTwpCellNumber = parentTwpCellNumber;
+    public void setParentTwoCellNumber(String parentTwoCellNumber) {
+        this.parentTwoCellNumber = parentTwoCellNumber;
     }
 
     public Player getPlayer() {
@@ -86,7 +86,7 @@ public class MedicalAidInfo implements Serializable {
         medicalInfo.put("medicalAidName", this.medicalAidNumber);
         medicalInfo.put("medicalAidPlan", this.medicalAidPlan);
         medicalInfo.put("player", this.player);
-        medicalInfo.put("secondParentPhoneNumber", this.parentTwpCellNumber);
+        medicalInfo.put("secondParentPhoneNumber", this.parentTwoCellNumber);
         return medicalInfo;
     }
 }

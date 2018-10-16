@@ -16,11 +16,11 @@
     <string name="fragment_teams_title">Teams</string>
     <string name="fragment_opponents_title">Opponents</string>
     <string name="title_activity_teams_opponents">Teams and Opponents</string>
-    <string name="title_activity_add_team">AddTeamActivity</string>
-    <string name="title_activity_add_opponent">AddOpponentActivity</string>
-    <string name="title_activity_select_team">SelectTeamActivity</string>
-    <string name="title_activity_move_players">MovePlayersActivity</string>
-    <string name="title_activity_medical_info">MedicalInfoActivity</string>
+    <string name="title_activity_add_team">Add Team</string>
+    <string name="title_activity_add_opponent">Ad dOpponent</string>
+    <string name="title_activity_select_team">Select TeamA</string>
+    <string name="title_activity_move_players">Move Players</string>
+    <string name="title_activity_medical_info">Medical Info</string>
     <string name="title_activity_add_player">Add Player</string>
     <string name="title_activity_select_player">Select Player</string>
     <string name="title_activity_select_opponent">Select Opponent</string>
@@ -28,4 +28,6 @@
     <string name="title_activity_my_players">My Players</string>
     <string name="title_activity_player_info">Player Info</string>
     <string name="title_activity_set_role">Set Role</string>
+    <string name="title_activity_edit_player">Edit Player</string>
+    <string name="title_activity_coach_menu">Coach Menu</string>
 </resources>

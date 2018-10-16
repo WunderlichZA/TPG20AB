@@ -8,9 +8,9 @@ import android.support.design.button.MaterialButton;
 import android.support.design.widget.TextInputEditText;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.backendless.Backendless;
 import com.backendless.async.callback.AsyncCallback;
@@ -112,7 +112,7 @@ public class MovePlayersActivity extends BaseActivity {
 
     private void movePlayer() {
         showLoadingProgress();
-
+        player.setTeam(team);
         ArrayList<Team> teams = new ArrayList<>();
         teams.add(team);
         Backendless.Data.of(Player.class)
@@ -120,14 +120,16 @@ public class MovePlayersActivity extends BaseActivity {
                             @Override
                             public void handleResponse(Integer response) {
                                 hideLoadingProgress();
-                                // TODO show toast
-                                Log.e(TAG, "Success: ");
+                                setPlayerInfo();
+                                Toast.makeText(MovePlayersActivity.this, "Player moved successfully", Toast.LENGTH_SHORT)
+                                     .show();
                             }
 
                             @Override
                             public void handleFault(BackendlessFault fault) {
                                 hideLoadingProgress();
-                                Log.e(TAG, "Error: " + fault.getMessage());
+                                Toast.makeText(MovePlayersActivity.this, fault.getMessage(), Toast.LENGTH_SHORT)
+                                     .show();
                             }
                         });
     }

@@ -1,5 +1,6 @@
 package za.ac.cut.hockeyapplication.activity;
 
+import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -37,6 +38,7 @@ public class LoginActivity extends BaseActivity {
         buttonRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                hideKeyboard();
                 Log.e("Login Activity", "onClick: error");
                 startActivity(new Intent(LoginActivity.this, RegisterActivity.class));
                 finish();
@@ -46,6 +48,7 @@ public class LoginActivity extends BaseActivity {
         buttonLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                hideKeyboard();
                 String username, password;
                 username = etUsername.getText().toString();
                 password = etPassword.getText().toString();
@@ -93,50 +96,61 @@ public class LoginActivity extends BaseActivity {
     }
 
     public void resetUserPassword() {
+        hideKeyboard();
         try {
             final EditText etPasswordReset = new EditText(this);
-            AlertDialog dialog = new AlertDialog.Builder(this).setTitle("Reset Password")
-                                                              .setMessage("Please enter your email address to send reset instructions to:")
-                                                              .setView(etPasswordReset)
-                                                              .setPositiveButton("Send", new DialogInterface.OnClickListener() {
+            dialog = new AlertDialog.Builder(this).setTitle("Reset Password")
+                                                  .setMessage("Please enter your email address to send reset instructions to:")
+                                                  .setView(etPasswordReset)
+                                                  .setPositiveButton("Send", new DialogInterface.OnClickListener() {
+                                                      @Override
+                                                      public void onClick(
+                                                              DialogInterface dialogInterface, int i
+                                                      ) {
+                                                          String email = etPasswordReset.getText()
+                                                                                        .toString()
+                                                                                        .trim();
+                                                          if (!TextUtils.isEmpty(email)) {
+                                                              Backendless.UserService.restorePassword(email, new AsyncCallback<Void>() {
                                                                   @Override
-                                                                  public void onClick(
-                                                                          DialogInterface dialogInterface,
-                                                                          int i
+                                                                  public void handleResponse(
+                                                                          Void response
                                                                   ) {
-                                                                      Backendless.UserService.restorePassword(etPasswordReset
-                                                                              .getText()
-                                                                              .toString()
-                                                                              .trim(), new AsyncCallback<Void>() {
-                                                                          @Override
-                                                                          public void handleResponse(
-                                                                                  Void response
-                                                                          ) {
-                                                                              if (response != null) {
-                                                                                  Toast.makeText(LoginActivity.this, "Password reset instructions has been sent to " + etPasswordReset
-                                                                                          .getText()
-                                                                                          .toString(), Toast.LENGTH_LONG)
-                                                                                       .show();
-                                                                              }
-                                                                          }
-
-                                                                          @Override
-                                                                          public void handleFault(
-                                                                                  BackendlessFault fault
-                                                                          ) {
-                                                                              Toast.makeText(LoginActivity.this, fault
-                                                                                      .getMessage(), Toast.LENGTH_LONG)
-                                                                                   .show();
-                                                                          }
-                                                                      });
+                                                                      if (response != null) {
+                                                                          Toast.makeText(LoginActivity.this, "Password reset instructions has been sent to " + etPasswordReset
+                                                                                  .getText()
+                                                                                  .toString(), Toast.LENGTH_LONG)
+                                                                               .show();
+                                                                      }
                                                                   }
-                                                              })
-                                                              .setNegativeButton("Cancel", null)
-                                                              .create();
+
+                                                                  @Override
+                                                                  public void handleFault(
+                                                                          BackendlessFault fault
+                                                                  ) {
+                                                                      Toast.makeText(LoginActivity.this, fault
+                                                                              .getMessage(), Toast.LENGTH_LONG)
+                                                                           .show();
+                                                                  }
+                                                              });
+                                                          } else {
+                                                              Toast.makeText(LoginActivity.this, "Enter email", Toast.LENGTH_SHORT)
+                                                                   .show();
+                                                          }
+                                                      }
+                                                  })
+                                                  .setNegativeButton("Cancel", null)
+                                                  .create();
             dialog.show();
         } catch (Exception e) {
             Log.e("Login Activity", "resetUserPassword: " + e.getMessage());
             e.printStackTrace();
         }
+    }
+
+    public static void start(Activity activity) {
+        Intent intent = new Intent(activity, LoginActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+        activity.startActivity(intent);
     }
 }

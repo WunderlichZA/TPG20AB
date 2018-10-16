@@ -15,6 +15,7 @@ import com.backendless.persistence.DataQueryBuilder;
 import java.util.List;
 
 import za.ac.cut.hockeyapplication.R;
+import za.ac.cut.hockeyapplication.activity.PlayerInfoActivity;
 import za.ac.cut.hockeyapplication.activity.SelectPlayerActivity;
 import za.ac.cut.hockeyapplication.adapter.PlayersAdapter;
 import za.ac.cut.hockeyapplication.model.Player;
@@ -96,7 +97,7 @@ public class PlayersFragment extends BaseFragment implements PlayersAdapter.Play
     public void onPlayerClick(Player player) {
         if (player != null) {
             if (viewable) {
-                // TODO
+                PlayerInfoActivity.start(requireActivity(), player);
             } else if (requireActivity() instanceof SelectPlayerActivity) {
                 ((SelectPlayerActivity) requireActivity()).setResult(player);
             }

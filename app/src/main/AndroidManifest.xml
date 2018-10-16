@@ -73,6 +73,9 @@
         <activity
             android:name=".activity.MedicalInfoActivity"
             android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.EditPlayerActivity"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>

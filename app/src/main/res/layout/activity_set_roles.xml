@@ -5,14 +5,14 @@
                 android:layout_height="match_parent">
 
     <include
-        android:id="@+id/hockeyToolbar"
+        android:id="@+id/toolbar_include"
         layout="@layout/toolbar" />
 
     <ScrollView
         android:id="@+id/scrollView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/hockeyToolbar"
+        android:layout_below="@+id/toolbar_include"
         tools:context=".activity.LoginActivity">
 
         <LinearLayout
@@ -20,35 +20,23 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_below="@+id/hockeyToolbar"
             android:clipChildren="false"
             android:clipToPadding="false"
             android:orientation="vertical"
             android:padding="24dp"
             android:paddingTop="16dp">
 
-            <!-- <TextView
-                 android:layout_width="wrap_content"
-                 android:layout_height="wrap_content"
-                 android:layout_marginTop="10dp"
-                 android:text="Select User"
-                 android:textStyle="bold"/> -->
-
-            <!-- <android.support.v7.widget.AppCompatSpinner
-                 android:id="@+id/spinner"
-                 android:layout_width="wrap_content"
-                 android:layout_height="wrap_content"></android.support.v7.widget.AppCompatSpinner> -->
             <android.support.design.button.MaterialButton
                 android:id="@+id/button_select_user"
                 style="@style/Widget.MaterialComponents.Button.TextButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:onClick="showUsers"
+                android:onClick="onClick"
                 android:text="Select User" />
 
             <TextView
-                android:id="@+id/roleText"
+                android:id="@+id/selected_user_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
@@ -87,7 +75,7 @@
                 android:id="@+id/save_changes_button"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:onClick="showUsers"
+                android:onClick="onClick"
                 android:text="Save Changes" />
         </LinearLayout>
 

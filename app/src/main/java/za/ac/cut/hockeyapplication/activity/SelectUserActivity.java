@@ -1,16 +1,14 @@
 package za.ac.cut.hockeyapplication.activity;
 
 import android.app.Activity;
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.Toolbar;
 
 import com.backendless.Backendless;
 import com.backendless.async.callback.BackendlessCallback;
@@ -21,7 +19,7 @@ import java.util.List;
 import za.ac.cut.hockeyapplication.R;
 import za.ac.cut.hockeyapplication.model.Users;
 
-public class SelectUserActivity extends AppCompatActivity {
+public class SelectUserActivity extends BaseActivity {
 
     public static final int RC_SELECT_USER = 100;
     public static final String EXTRA_USER = "EXTRA_USER";
@@ -29,12 +27,8 @@ public class SelectUserActivity extends AppCompatActivity {
     private List<Users> usersList;
     private Users user;
 
-    private ProgressDialog progressDialog;
     ListView listView;
-
     ArrayAdapter<Users> usersArrayAdapter;
-
-    Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,7 +36,7 @@ public class SelectUserActivity extends AppCompatActivity {
         setContentView(R.layout.activity_user_items);
 
         // Set toolbar
-        android.support.v7.widget.Toolbar toolbar = findViewById(R.id.toolbar_include);
+        Toolbar toolbar = findViewById(R.id.toolbar_include);
         setSupportActionBar(toolbar);
         if (getSupportActionBar() != null) {
             getSupportActionBar().setTitle(R.string.title_activity_select_user);
@@ -73,40 +67,26 @@ public class SelectUserActivity extends AppCompatActivity {
     }
 
     public void loadUsers() {
-        progressDialog = new ProgressDialog(this);
-        progressDialog.setMax(100);
-        progressDialog.setMessage("Loading users");
-        progressDialog.setTitle("Roles");
-        progressDialog.show();
+        showLoadingProgress();
 
-        try {
-
-            Backendless.Data.of(Users.class).find(new BackendlessCallback<List<Users>>() {
-                @Override
-                public void handleResponse(List<Users> response) {
-                    if (response != null) {
-                        usersList = response;
-                        progressDialog.dismiss();
-                        usersArrayAdapter = new ArrayAdapter<>(SelectUserActivity.this, R.layout.support_simple_spinner_dropdown_item, usersList);
-                        //listView.setAdapter(usersArrayAdapter);
-                        listView.setAdapter(usersArrayAdapter);
-                        Log.e("UsersActivity", "handleResponse: " + usersList.get(1)
-                                                                             .getName()
-                                                                             .toString());
-                    }
+        Backendless.Data.of(Users.class).find(new BackendlessCallback<List<Users>>() {
+            @Override
+            public void handleResponse(List<Users> response) {
+                if (response != null) {
+                    hideLoadingProgress();
+                    usersList = response;
+                    usersArrayAdapter = new ArrayAdapter<>(SelectUserActivity.this, R.layout.support_simple_spinner_dropdown_item, usersList);
+                    listView.setAdapter(usersArrayAdapter);
                 }
+            }
 
-                @Override
-                public void handleFault(BackendlessFault fault) {
-                    super.handleFault(fault);
-                    progressDialog.dismiss();
-                    //errorMessage.setVisibility(View.VISIBLE);
-                    Log.e("UsersActivity", "handleResponse: " + fault.getMessage());
-                }
-            });
-        } catch (Exception e) {
-            Log.e("Exception", "getUsers: " + e.getMessage());
-        }
+            @Override
+            public void handleFault(BackendlessFault fault) {
+                hideLoadingProgress();
+                //errorMessage.setVisibility(View.VISIBLE);
+                Log.e("UsersActivity", "handleResponse: " + fault.getMessage());
+            }
+        });
     }
 
     public static void start(Activity activity) {

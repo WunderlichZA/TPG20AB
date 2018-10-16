@@ -96,4 +96,9 @@ public class Users implements Serializable {
     public String getFullName() {
         return surname + " " + name;
     }
+
+    @Override
+    public String toString() {
+        return getFullName();
+    }
 }

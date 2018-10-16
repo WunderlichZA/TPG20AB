@@ -11,6 +11,7 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.backendless.Backendless;
 import com.backendless.async.callback.AsyncCallback;
@@ -81,6 +82,12 @@ public class AddTeamActivity extends BaseActivity {
         boolean valid = true;
         String error = null;
 
+        if (coach == null) {
+            error = "Select team coach";
+            valid = false;
+        }
+        coachNameTextInputLayout.setError(error);
+
         if (TextUtils.isEmpty(teamNameEditText.getText().toString())) {
             error = "Enter team name";
             valid = false;
@@ -89,12 +96,6 @@ public class AddTeamActivity extends BaseActivity {
 
         // Reset error
         error = null;
-
-        if (coach == null) {
-            error = "Select team coach";
-            valid = false;
-        }
-        coachNameTextInputLayout.setError(error);
 
         return valid;
     }
@@ -114,13 +115,16 @@ public class AddTeamActivity extends BaseActivity {
                                     @Override
                                     public void handleResponse(Integer response) {
                                         hideLoadingProgress();
+                                        Toast.makeText(AddTeamActivity.this, "Team added successfully", Toast.LENGTH_SHORT)
+                                             .show();
                                         finish();
                                     }
 
                                     @Override
                                     public void handleFault(BackendlessFault fault) {
                                         hideLoadingProgress();
-                                        Log.e(TAG, "Error: " + fault.getMessage());
+                                        Toast.makeText(AddTeamActivity.this, fault.getMessage(), Toast.LENGTH_SHORT)
+                                             .show();
                                     }
                                 });
             }

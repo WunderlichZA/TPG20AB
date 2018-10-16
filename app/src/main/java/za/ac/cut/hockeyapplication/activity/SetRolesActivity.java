@@ -19,15 +19,17 @@ import com.backendless.async.callback.AsyncCallback;
 import com.backendless.exceptions.BackendlessFault;
 
 import za.ac.cut.hockeyapplication.R;
+import za.ac.cut.hockeyapplication.helper.UserHelper;
 import za.ac.cut.hockeyapplication.model.Users;
 
 public class SetRolesActivity extends BaseActivity {
 
-    private Users loggedInUser;
+    private Users selectedUser;
     String userRole;
 
     LinearLayout rolesLayout;
-    TextView errorMessage, selectUser;
+    TextView selectUserName;
+    RadioButton radioAdmin, radioCoach, radioNone;
     MaterialButton buttonSaveChanges, buttonSelectUser;
 
     @Override
@@ -43,19 +45,23 @@ public class SetRolesActivity extends BaseActivity {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
 
+        selectUserName = findViewById(R.id.selected_user_name);
+        radioAdmin = findViewById(R.id.radio_admin);
+        radioCoach = findViewById(R.id.radio_coach);
+        radioNone = findViewById(R.id.radio_none);
+
         buttonSaveChanges = findViewById(R.id.save_changes_button);
-        selectUser = findViewById(R.id.roleText);
         buttonSelectUser = findViewById(R.id.button_select_user);
         rolesLayout = findViewById(R.id.roles_layout);
     }
 
-    public void showUsers(View view) {
+    public void onClick(View view) {
         switch (view.getId()) {
             case R.id.button_select_user:
                 SelectUserActivity.start(SetRolesActivity.this);
                 break;
             case R.id.save_changes_button:
-                saveChanges(loggedInUser);
+                saveChanges(selectedUser);
                 break;
         }
     }
@@ -69,18 +75,35 @@ public class SetRolesActivity extends BaseActivity {
             case R.id.radio_admin:
                 if (checked)
                     // User is Admin
-                    userRole = "ADMIN";
+                    userRole = UserHelper.ROLE_ADMIN;
                 break;
             case R.id.radio_coach:
                 if (checked)
                     // User ia Coach
-                    userRole = "COACH";
+                    userRole = UserHelper.ROLE_COACH;
                 break;
             case R.id.radio_none:
                 if (checked)
                     // User has no access to the app
-                    userRole = "NONE";
+                    userRole = UserHelper.ROLE_NONE;
                 break;
+        }
+    }
+
+    private void setUserInfo() {
+        if (selectedUser != null) {
+            selectUserName.setText(selectedUser.getFullName());
+            switch (selectedUser.getRole()) {
+                case UserHelper.ROLE_ADMIN:
+                    radioAdmin.setChecked(true);
+                    break;
+                case UserHelper.ROLE_COACH:
+                    radioCoach.setChecked(true);
+                    break;
+                case UserHelper.ROLE_NONE:
+                    radioNone.setChecked(true);
+                    break;
+            }
         }
     }
 
@@ -89,15 +112,10 @@ public class SetRolesActivity extends BaseActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == SelectUserActivity.RC_SELECT_USER && resultCode == RESULT_OK) {
             if (data != null && data.hasExtra(SelectUserActivity.EXTRA_USER)) {
-                loggedInUser = (Users) data.getSerializableExtra(SelectUserActivity.EXTRA_USER);
-                selectUser.setText(loggedInUser.toString());
+                selectedUser = (Users) data.getSerializableExtra(SelectUserActivity.EXTRA_USER);
+                setUserInfo();
             }
         }
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
     }
 
     public void saveChanges(final Users user) {

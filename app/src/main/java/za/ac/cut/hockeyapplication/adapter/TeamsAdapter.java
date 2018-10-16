@@ -55,15 +55,14 @@ public class TeamsAdapter extends RecyclerView.Adapter<TeamsAdapter.TeamViewHold
 
         private TeamClickListener teamClickListener;
         private TextView name;
+        private TextView coach;
         private Team team;
 
         public TeamViewHolder(@NonNull View itemView, TeamClickListener clickListener) {
             super(itemView);
 
             this.teamClickListener = clickListener;
-            name = itemView.findViewById(R.id.name);
-            name.setClickable(teamClickListener != null);
-            name.setOnClickListener(new View.OnClickListener() {
+            itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     if (teamClickListener != null && team != null) {
@@ -71,11 +70,17 @@ public class TeamsAdapter extends RecyclerView.Adapter<TeamsAdapter.TeamViewHold
                     }
                 }
             });
+            itemView.setClickable(teamClickListener != null);
+            name = itemView.findViewById(R.id.name);
+            coach = itemView.findViewById(R.id.coach);
         }
 
         public void bind(Team team) {
             this.team = team;
             name.setText(team.getTeamName());
+            if (team.getCoach() != null) {
+                coach.setText("Coach: " + team.getCoach().getFullName());
+            }
         }
     }
 }
